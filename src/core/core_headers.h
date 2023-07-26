@@ -59,15 +59,15 @@ typedef struct CurvePoint {
 #include <math.h>
 #include <chrono>
 #include "sqlite/sqlite3.h"
-#include <wx/wx.h>
 #include <wx/txtstrm.h>
+#include <wx/wfstream.h>
+#include <wx/wx.h>
 #include <wx/defs.h>
 #include <wx/socket.h>
 #include <wx/cmdline.h>
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include <wx/dir.h>
-#include <wx/wfstream.h>
 #include <wx/tokenzr.h>
 #include <wx/textfile.h>
 #include <wx/regex.h>

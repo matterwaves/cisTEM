@@ -7,6 +7,7 @@ aclocal.m4
 install-sh
 compile
 configure
+configure~
 missing
 config.guess
 depcomp
