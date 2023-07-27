@@ -30,9 +30,7 @@ add_library(cisTEM_core STATIC
 	particle.cpp
 	job_packager.cpp
 	job_tracker.cpp
-	run_command.cpp
-	run_profile.cpp
-	run_profile_manager.cpp
+	run_profiles.cpp
 	myapp.cpp
 	empirical_distribution.cpp
 	ctf.cpp

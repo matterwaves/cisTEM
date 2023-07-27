@@ -2,34 +2,36 @@
 #define __AbInitioPlotPanel__
 
 class
-        AbInitioPlotPanel : public AbInitioPlotPanelParent {
+AbInitioPlotPanel : public AbInitioPlotPanelParent
+{
 
-    //wxBoxSizer* LikelihoodSizer;
-    wxBoxSizer* SigmaSizer;
+	//wxBoxSizer* LikelihoodSizer;
+	wxBoxSizer* SigmaSizer;
 
-  public:
-    AbInitioPlotPanel(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxTAB_TRAVERSAL);
-    ~AbInitioPlotPanel( );
+public :
 
-    void Clear( );
-    void AddPoints(float round, float sigma);
-    void Draw( );
+	AbInitioPlotPanel(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxTAB_TRAVERSAL);
+	~AbInitioPlotPanel();
 
-    std::vector<double> round_data;
-    //	std::vector<double> likelihood_data;
-    std::vector<double> sigma_data;
+	void Clear();
+	void AddPoints(float round, float sigma);
+	void Draw();
 
-    //	mpWindow        *likelihood_plot_window;
-    mpWindow* sigma_plot_window;
+	std::vector<double> round_data;
+//	std::vector<double> likelihood_data;
+	std::vector<double> sigma_data;
 
-    //	mpScaleX * likelihood_xaxis;
-    mpScaleX* sigma_xaxis;
+//	mpWindow        *likelihood_plot_window;
+	mpWindow        *sigma_plot_window;
 
-    //	mpScaleY * likelihood_yaxis;
-    mpScaleY* sigma_yaxis;
+//	mpScaleX * likelihood_xaxis;
+	mpScaleX * sigma_xaxis;
 
-    //	mpFXYVector* likelihood_vector_layer;
-    mpFXYVector* sigma_vector_layer;
+//	mpScaleY * likelihood_yaxis;
+	mpScaleY * sigma_yaxis;
+
+//	mpFXYVector* likelihood_vector_layer;
+	mpFXYVector* sigma_vector_layer;
 };
 
 #endif

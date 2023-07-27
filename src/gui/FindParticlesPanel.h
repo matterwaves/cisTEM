@@ -1,120 +1,124 @@
 #ifndef __FindParticlesPanel__
 #define __FindParticlesPanel__
 
-class MyFindParticlesPanel : public FindParticlesPanel {
-    long my_job_id;
-    int  length_of_process_number;
 
-    bool running_job;
+class MyFindParticlesPanel : public FindParticlesPanel
+{
+		long my_job_id;
+		int length_of_process_number;
 
-    //Image result_image;
-    //wxBitmap result_bitmap;
+		bool running_job;
 
-    AssetGroup active_group;
+		//Image result_image;
+		//wxBitmap result_bitmap;
 
-  public:
-    MyFindParticlesPanel(wxWindow* parent);
-    JobResult* buffered_results;
+		AssetGroup active_group;
 
-    bool group_combo_is_dirty;
-    bool run_profiles_are_dirty;
-    long time_of_last_result_update;
+public:
 
-    // methods
-    void Reset( );
-    void ResetDefaults( );
+		MyFindParticlesPanel( wxWindow* parent );
+		JobResult *buffered_results;
 
-    void OnGroupComboBox(wxCommandEvent& event);
-    void OnImageComboBox(wxCommandEvent& event);
-    void WriteResultToDataBase( );
-    void ProcessAllJobsFinished( );
-    void OnExpertOptionsToggle(wxCommandEvent& event);
-    void OnUpdateUI(wxUpdateUIEvent& event);
-    void FillGroupComboBox( );
-    void FillImageComboBox( );
-    void FillPickingAlgorithmComboBox( );
-    void OnPickingAlgorithmComboBox(wxCommandEvent& event);
-    void FillRunProfileComboBox( );
-    void StartPickingClick(wxCommandEvent& event);
-    void FinishButtonClick(wxCommandEvent& event);
-    void TerminateButtonClick(wxCommandEvent& event);
-    void OnAutoPickRefreshCheckBox(wxCommandEvent& event);
-    void OnSetMinimumDistanceFromEdgesCheckBox(wxCommandEvent& event);
-    void OnTestOnCurrentMicrographButtonClick(wxCommandEvent& event);
-    void OnExclusionRadiusNumericTextEnter(wxCommandEvent& event);
-    void OnTemplateRadiusNumericTextEnter(wxCommandEvent& event);
-    void OnThresholdPeakHeightNumericTextEnter(wxCommandEvent& event);
-    void CheckWhetherGroupsCanBePicked( );
-    void SetAllUserParametersForParticleFinder( );
-    void DrawResultsFromParticleFinder( );
-    int  ReturnDefaultMinimumDistanceFromEdges( );
-    void ShowPickingParametersPanel( );
+		bool group_combo_is_dirty;
+		bool run_profiles_are_dirty;
+		long time_of_last_result_update;
 
-    void OnNewTemplateRadius( );
-    void OnNewThresholdPeakHeight( );
-    void OnNewExclusionRadius( );
-    void OnNewHighestResolution( );
-    void OnNewLowVarianceThreshold( );
-    void OnNewHighVarianceThreshold( );
 
-    void OnTemplateRadiusNumericTextKillFocus(wxFocusEvent& event);
-    void OnTemplateRadiusNumericTextSetFocus(wxFocusEvent& event);
-    void OnThresholdPeakHeightNumericTextKillFocus(wxFocusEvent& event);
-    void OnThresholdPeakHeightNumericTextSetFocus(wxFocusEvent& event);
-    void OnExclusionRadiusNumericTextKillFocus(wxFocusEvent& event);
-    void OnExclusionRadiusNumericTextSetFocus(wxFocusEvent& event);
+		// methods
+		void Reset();
+		void ResetDefaults();
 
-    void OnHighestResolutionNumericTextEnter(wxCommandEvent& event);
-    void OnHighestResolutionNumericKillFocus(wxFocusEvent& event);
-    void OnHighestResolutionNumericSetFocus(wxFocusEvent& event);
+		void OnGroupComboBox( wxCommandEvent& event );
+		void OnImageComboBox( wxCommandEvent& event );
+		void WriteResultToDataBase();
+		void ProcessAllJobsFinished();
+		void OnExpertOptionsToggle( wxCommandEvent& event );
+		void OnUpdateUI( wxUpdateUIEvent& event );
+		void FillGroupComboBox();
+		void FillImageComboBox();
+		void FillPickingAlgorithmComboBox();
+		void OnPickingAlgorithmComboBox( wxCommandEvent& event );
+		void FillRunProfileComboBox();
+		void StartPickingClick( wxCommandEvent& event );
+		void FinishButtonClick( wxCommandEvent& event );
+		void TerminateButtonClick( wxCommandEvent& event );
+		void OnAutoPickRefreshCheckBox( wxCommandEvent& event );
+		void OnSetMinimumDistanceFromEdgesCheckBox( wxCommandEvent & event );
+		void OnTestOnCurrentMicrographButtonClick( wxCommandEvent & event );
+		void OnExclusionRadiusNumericTextEnter( wxCommandEvent& event );
+		void OnTemplateRadiusNumericTextEnter( wxCommandEvent& event );
+		void OnThresholdPeakHeightNumericTextEnter( wxCommandEvent& event );
+		void CheckWhetherGroupsCanBePicked();
+		void SetAllUserParametersForParticleFinder();
+		void DrawResultsFromParticleFinder();
+		int ReturnDefaultMinimumDistanceFromEdges();
+		void ShowPickingParametersPanel();
 
-    void OnMinimumDistanceFromEdgesSpinCtrl(wxSpinEvent& event);
-    void OnAvoidLowVarianceAreasCheckBox(wxCommandEvent& event);
-    void OnAvoidHighVarianceAreasCheckBox(wxCommandEvent& event);
-    void OnLowVarianceThresholdNumericTextEnter(wxCommandEvent& event);
-    void OnLowVarianceThresholdNumericKillFocus(wxFocusEvent& event);
-    void OnLowVarianceThresholdNumericSetFocus(wxFocusEvent& event);
-    void OnHighVarianceThresholdNumericTextEnter(wxCommandEvent& event);
-    void OnHighVarianceThresholdNumericKillFocus(wxFocusEvent& event);
-    void OnHighVarianceThresholdNumericSetFocus(wxFocusEvent& event);
-    void OnAvoidAbnormalLocalMeanAreasCheckBox(wxCommandEvent& event);
-    void OnNumberOfBackgroundBoxesSpinCtrl(wxSpinEvent& event);
-    void OnAlgorithmToFindBackgroundChoice(wxCommandEvent& event);
+		void OnNewTemplateRadius();
+		void OnNewThresholdPeakHeight();
+		void OnNewExclusionRadius();
+		void OnNewHighestResolution();
+		void OnNewLowVarianceThreshold();
+		void OnNewHighVarianceThreshold();
 
-    //void Refresh();
-    void SetInfo( );
-    void OnInfoURL(wxTextUrlEvent& event);
+		void OnTemplateRadiusNumericTextKillFocus( wxFocusEvent & event );
+		void OnTemplateRadiusNumericTextSetFocus( wxFocusEvent & event );
+		void OnThresholdPeakHeightNumericTextKillFocus( wxFocusEvent & event );
+		void OnThresholdPeakHeightNumericTextSetFocus( wxFocusEvent & event );
+		void OnExclusionRadiusNumericTextKillFocus( wxFocusEvent& event);
+		void OnExclusionRadiusNumericTextSetFocus( wxFocusEvent& event);
 
-    ArrayOfParticlePositionAssets ParticlePositionsFromJobResults(JobResult* job_result, const int& parent_image_id, const int& picking_job_id, const int& picking_id, const int& starting_asset_id);
+		void OnHighestResolutionNumericTextEnter( wxCommandEvent & event );
+		void OnHighestResolutionNumericKillFocus( wxFocusEvent & event );
+		void OnHighestResolutionNumericSetFocus( wxFocusEvent & event );
 
-    void WriteInfoText(wxString text_to_write);
-    void WriteErrorText(wxString text_to_write);
+		void OnMinimumDistanceFromEdgesSpinCtrl( wxSpinEvent& event );
+		void OnAvoidLowVarianceAreasCheckBox( wxCommandEvent& event );
+		void OnAvoidHighVarianceAreasCheckBox( wxCommandEvent& event );
+		void OnLowVarianceThresholdNumericTextEnter( wxCommandEvent & event);
+		void OnLowVarianceThresholdNumericKillFocus( wxFocusEvent & event );
+		void OnLowVarianceThresholdNumericSetFocus( wxFocusEvent & event );
+		void OnHighVarianceThresholdNumericTextEnter( wxCommandEvent & event);
+		void OnHighVarianceThresholdNumericKillFocus( wxFocusEvent & event );
+		void OnHighVarianceThresholdNumericSetFocus( wxFocusEvent & event );
+		void OnAvoidAbnormalLocalMeanAreasCheckBox( wxCommandEvent& event );
+		void OnNumberOfBackgroundBoxesSpinCtrl( wxSpinEvent& event );
+		void OnAlgorithmToFindBackgroundChoice( wxCommandEvent& event );
 
-    void ProcessResult(JobResult* result_to_process, const int& wanted_job_number = -1);
-    void UpdateProgressBar( );
+	//void Refresh();
+		void SetInfo();
+		void OnInfoURL(wxTextUrlEvent& event);
 
-    // overridden socket methods..
+		ArrayOfParticlePositionAssets ParticlePositionsFromJobResults(JobResult *job_result, const int &parent_image_id, const int &picking_job_id, const int &picking_id, const int &starting_asset_id);
 
-    void OnSocketJobResultMsg(JobResult& received_result);
-    void SetNumberConnectedText(wxString wanted_text);
-    void SetTimeRemainingText(wxString wanted_text);
-    void OnSocketJobFinished(int finished_job_number);
-    void OnSocketAllJobsFinished( );
+		void WriteInfoText(wxString text_to_write);
+		void WriteErrorText(wxString text_to_write);
 
-    //
-    enum particle_picking_algorithms { ab_initio,
-                                       number_of_picking_algorithms };
+		void ProcessResult(JobResult *result_to_process, const int &wanted_job_number = -1);
+		void UpdateProgressBar();
 
-    wxString ReturnNameOfPickingAlgorithm(const int wanted_algorithm);
+		// overridden socket methods..
 
-    int ReturnNumberOfJobsCurrentlyRunning( );
+		void OnSocketJobResultMsg(JobResult &received_result);
+		void SetNumberConnectedText(wxString wanted_text);
+		void SetTimeRemainingText(wxString wanted_text);
+		void OnSocketJobFinished(int finished_job_number);
+		void OnSocketAllJobsFinished();
 
-    int number_of_particles_picked;
+		//
+		enum particle_picking_algorithms { ab_initio, number_of_picking_algorithms };
+		wxString ReturnNameOfPickingAlgorithm( const int wanted_algorithm );
 
-  private:
-    ParticleFinder particle_finder;
+		int ReturnNumberOfJobsCurrentlyRunning();
 
-    float value_on_focus_float;
+		int number_of_particles_picked;
+
+private:
+		ParticleFinder particle_finder;
+
+		float 	value_on_focus_float;
+
+
 };
 
 #endif // __FindParticlesPanel__

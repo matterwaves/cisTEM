@@ -7,310 +7,370 @@ class MyNewRefinementPackageWizard;
 
 // this is a shitty little class for holding class selections
 
-class NewRefinementPackageWizardClassSelection {
-  public:
-    wxArrayBool class_selection;
+class NewRefinementPackageWizardClassSelection
+{
+public:
+	wxArrayBool class_selection;
 };
 
 WX_DECLARE_OBJARRAY(NewRefinementPackageWizardClassSelection, ArrayofNewRefinementPackageWizardClassSelection);
 
-class TemplateWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class TemplateWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    TemplateWizardPanel* my_panel;
+	public:
 
-    TemplateWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
-    ~TemplateWizardPage( );
+	TemplateWizardPanel *my_panel;
 
-    void RefinementPackageChanged(wxCommandEvent& event);
+ 	 TemplateWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+ 	 ~TemplateWizardPage ();
 
-    wxWizardPage* GetNext( ) const;
+ 	 void RefinementPackageChanged( wxCommandEvent& event );
 
-    wxWizardPage* GetPrev( ) const { return NULL; };
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const {return NULL;};
+
 };
 
-class InputParameterWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class InputParameterWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    InputParameterWizardPanel* my_panel;
+	public:
 
-    InputParameterWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	InputParameterWizardPanel *my_panel;
+
+ 	 InputParameterWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
+
 };
 
-class ParticleGroupWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class ParticleGroupWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    ParticleGroupWizardPanel* my_panel;
+	public:
 
-    ParticleGroupWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
+	ParticleGroupWizardPanel *my_panel;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+ 	 ParticleGroupWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
+
 };
 
-class BoxSizeWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class BoxSizeWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    BoxSizeWizardPanel* my_panel;
+	public:
 
-    BoxSizeWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
+	BoxSizeWizardPanel *my_panel;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	BoxSizeWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
+
 };
 
-class NumberofClassesWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class NumberofClassesWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    NumberofClassesWizardPanel* my_panel;
+	public:
 
-    NumberofClassesWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
-    ~NumberofClassesWizardPage( );
+	NumberofClassesWizardPanel *my_panel;
 
-    void NumberClassesChanged(wxSpinEvent& event);
+	NumberofClassesWizardPage(MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+	~NumberofClassesWizardPage();
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	void NumberClassesChanged(wxSpinEvent& event);
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
+
 };
 
-class InitialReferencesWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class InitialReferencesWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    InitialReferenceSelectWizardPanel* my_panel;
-    wxBoxSizer*                        main_sizer;
+	public:
 
-    InitialReferencesWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
+	InitialReferenceSelectWizardPanel *my_panel;
+	wxBoxSizer* main_sizer;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	InitialReferencesWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
 
-    void CreatePanel( );
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
+
+	 void CreatePanel();
+
 };
 
-class SymmetryWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class SymmetryWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    SymmetryWizardPanel* my_panel;
+	public:
 
-    SymmetryWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
+	SymmetryWizardPanel *my_panel;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	SymmetryWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
 };
 
-class MolecularWeightWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class MolecularWeightWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    MolecularWeightWizardPanel* my_panel;
+	public:
 
-    MolecularWeightWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
+	MolecularWeightWizardPanel *my_panel;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	MolecularWeightWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
 };
 
-class LargestDimensionWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class LargestDimensionWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    LargestDimensionWizardPanel* my_panel;
+	public:
 
-    LargestDimensionWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
+	LargestDimensionWizardPanel *my_panel;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	LargestDimensionWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
 };
 
-class ClassesSetupWizardPageA : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
 
-  public:
-    ClassesSetupWizardPanelA* my_panel;
 
-    ClassesSetupWizardPageA(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
-    ~ClassesSetupWizardPageA( );
+class ClassesSetupWizardPageA : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-    void CarryOverYesButtonChanged(wxCommandEvent& event);
+	public:
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	ClassesSetupWizardPanelA *my_panel;
+
+	ClassesSetupWizardPageA (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+	~ClassesSetupWizardPageA();
+
+	void CarryOverYesButtonChanged(wxCommandEvent& event);
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
+
 };
 
-class ClassesSetupWizardPageB : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class ClassesSetupWizardPageB : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    ClassesSetupWizardPanelB* my_panel;
+	public:
 
-    ClassesSetupWizardPageB(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
-    ~ClassesSetupWizardPageB( );
+	ClassesSetupWizardPanelB *my_panel;
 
-    void        ClassSelectionChanged(wxListEvent& event);
-    wxArrayBool ReturnSelectedClasses( );
+	ClassesSetupWizardPageB (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+	~ClassesSetupWizardPageB ();
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	void ClassSelectionChanged( wxListEvent& event );
+	wxArrayBool ReturnSelectedClasses();
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
+
 };
 
-class ClassesSetupWizardPageC : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class ClassesSetupWizardPageC : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    ClassesSetupWizardPanelC* my_panel;
+	public:
 
-    void OldClassListCtrlDeSelected(wxListEvent& event);
-    void OldClassListCtrlSelected(wxListEvent& event);
-    void NewClassSelectionChanged(wxListEvent& event);
+	ClassesSetupWizardPanelC *my_panel;
 
-    int  ReturnSelectedNewClass( );
-    void DrawClassSelections( );
-    void UpdateCurrentClassSelectionsText( );
+	void OldClassListCtrlDeSelected( wxListEvent& event );
+	void OldClassListCtrlSelected( wxListEvent& event );
+	void NewClassSelectionChanged( wxListEvent& event );
 
-    bool       IsAtLeastOneOldClassSelectedForEachNewClass( );
-    wxArrayInt ReturnReferencesForClass(int wanted_class);
+	int ReturnSelectedNewClass();
+	void DrawClassSelections();
+	void UpdateCurrentClassSelectionsText();
 
-    ArrayofNewRefinementPackageWizardClassSelection current_class_selections;
+	bool IsAtLeastOneOldClassSelectedForEachNewClass();
+	wxArrayInt ReturnReferencesForClass(int wanted_class);
 
-    ClassesSetupWizardPageC(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
-    ~ClassesSetupWizardPageC( );
+	ArrayofNewRefinementPackageWizardClassSelection current_class_selections;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	ClassesSetupWizardPageC (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+	~ClassesSetupWizardPageC ();
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
+
 };
 
-class ClassesSetupWizardPageD : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class ClassesSetupWizardPageD : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    ClassesSetupWizardPanelD* my_panel;
+	public:
 
-    ClassesSetupWizardPageD(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
+	ClassesSetupWizardPanelD *my_panel;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	ClassesSetupWizardPageD (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
 };
 
-class ClassesSetupWizardPageE : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class ClassesSetupWizardPageE : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    ClassesSetupWizardPanelE* my_panel;
+	public:
 
-    ClassesSetupWizardPageE(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
+	ClassesSetupWizardPanelE *my_panel;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	ClassesSetupWizardPageE (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
+
 };
 
-class ClassSelectionWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class ClassSelectionWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    ClassSelectionWizardPanel* my_panel;
 
-    ClassSelectionWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
+	public:
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	ClassSelectionWizardPanel *my_panel;
+
+	ClassSelectionWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
+
 };
 
-class RecentrePicksWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class RecentrePicksWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    RecentrePicksWizardPanel* my_panel;
+	public:
 
-    RecentrePicksWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
-    ~RecentrePicksWizardPage( );
+	RecentrePicksWizardPanel *my_panel;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	RecentrePicksWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+ 	~RecentrePicksWizardPage ();
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
+
 };
 
-class RemoveDuplicatesWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class RemoveDuplicatesWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    RemoveDuplicatesWizardPanel* my_panel;
+	public:
 
-    RemoveDuplicatesWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
-    ~RemoveDuplicatesWizardPage( );
+	RemoveDuplicatesWizardPanel *my_panel;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	RemoveDuplicatesWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+ 	~RemoveDuplicatesWizardPage ();
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
+
 };
 
-class RemoveDuplicateThresholdWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class RemoveDuplicateThresholdWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    RemoveDuplicateThresholdWizardPanel* my_panel;
+	public:
 
-    RemoveDuplicateThresholdWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
-    ~RemoveDuplicateThresholdWizardPage( );
+	RemoveDuplicateThresholdWizardPanel *my_panel;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	RemoveDuplicateThresholdWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+ 	~RemoveDuplicateThresholdWizardPage ();
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
 };
 
-class OutputPixelSizeWizardPage : public wxWizardPage {
-    MyNewRefinementPackageWizard* wizard_pointer;
+class OutputPixelSizeWizardPage : public wxWizardPage
+{
+	MyNewRefinementPackageWizard *wizard_pointer;
 
-  public:
-    OutputPixelSizeWizardPanel* my_panel;
+	public:
 
-    OutputPixelSizeWizardPage(MyNewRefinementPackageWizard* parent, const wxBitmap& bitmap = wxNullBitmap);
+	OutputPixelSizeWizardPanel *my_panel;
 
-    wxWizardPage* GetNext( ) const;
-    wxWizardPage* GetPrev( ) const;
+	OutputPixelSizeWizardPage (MyNewRefinementPackageWizard *parent, const wxBitmap &bitmap=wxNullBitmap);
+
+
+ 	 wxWizardPage * GetNext () const;
+	 wxWizardPage * GetPrev () const;
 };
 
-class MyNewRefinementPackageWizard : public NewRefinementPackageWizard {
-  public:
-    MyNewRefinementPackageWizard(wxWindow* parent);
-    ~MyNewRefinementPackageWizard( );
 
-    TemplateWizardPage*          template_page;
-    InputParameterWizardPage*    parameter_page;
-    ParticleGroupWizardPage*     particle_group_page;
-    NumberofClassesWizardPage*   number_of_classes_page;
-    BoxSizeWizardPage*           box_size_page;
-    InitialReferencesWizardPage* initial_reference_page;
-    SymmetryWizardPage*          symmetry_page;
-    MolecularWeightWizardPage*   molecular_weight_page;
-    LargestDimensionWizardPage*  largest_dimension_page;
-    ClassSelectionWizardPage*    class_selection_page;
-    OutputPixelSizeWizardPage*   output_pixel_size_page;
 
-    RecentrePicksWizardPage*            recentre_picks_page;
-    RemoveDuplicatesWizardPage*         remove_duplicate_picks_page;
-    RemoveDuplicateThresholdWizardPage* remove_duplicate_picks_threshold_page;
+class MyNewRefinementPackageWizard : public NewRefinementPackageWizard
+{
+public:
 
-    ClassesSetupWizardPageA* class_setup_pageA;
-    ClassesSetupWizardPageB* class_setup_pageB;
-    ClassesSetupWizardPageC* class_setup_pageC;
-    ClassesSetupWizardPageD* class_setup_pageD;
-    ClassesSetupWizardPageE* class_setup_pageE;
+		MyNewRefinementPackageWizard( wxWindow* parent );
+		~MyNewRefinementPackageWizard();
 
-    void DisableNextButton( );
-    void EnableNextButton( );
+		TemplateWizardPage *template_page;
+		InputParameterWizardPage *parameter_page;
+		ParticleGroupWizardPage *particle_group_page;
+		NumberofClassesWizardPage *number_of_classes_page;
+		BoxSizeWizardPage *box_size_page;
+		InitialReferencesWizardPage *initial_reference_page;
+		SymmetryWizardPage *symmetry_page;
+		MolecularWeightWizardPage *molecular_weight_page;
+		LargestDimensionWizardPage *largest_dimension_page;
+		ClassSelectionWizardPage *class_selection_page;
+		OutputPixelSizeWizardPage *output_pixel_size_page;
 
-    void OnFinished(wxWizardEvent& event);
-    void OnUpdateUI(wxUpdateUIEvent& event);
-    void PageChanging(wxWizardEvent& event);
-    void PageChanged(wxWizardEvent& event);
+		RecentrePicksWizardPage *recentre_picks_page;
+		RemoveDuplicatesWizardPage *remove_duplicate_picks_page;
+		RemoveDuplicateThresholdWizardPage *remove_duplicate_picks_threshold_page;
 
-    wxArrayInt ReturnIDsOfActiveImages(ArrayOfRefinmentPackageParticleInfos& particle_info_buffer);
+		ClassesSetupWizardPageA *class_setup_pageA;
+		ClassesSetupWizardPageB *class_setup_pageB;
+		ClassesSetupWizardPageC *class_setup_pageC;
+		ClassesSetupWizardPageD *class_setup_pageD;
+		ClassesSetupWizardPageE *class_setup_pageE;
+
+		void DisableNextButton();
+		void EnableNextButton();
+
+		void OnFinished( wxWizardEvent& event );
+		void OnUpdateUI(wxUpdateUIEvent& event);
+		void PageChanging(wxWizardEvent& event);
+		void PageChanged(wxWizardEvent& event);
+
+		wxArrayInt ReturnIDsOfActiveImages( ArrayOfRefinmentPackageParticleInfos& particle_info_buffer );
+
 };
 
 #endif

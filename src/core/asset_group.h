@@ -1,52 +1,62 @@
 class AssetGroup {
 
-    long number_allocated;
+	long number_allocated;
+
+
 
   public:
-    AssetGroup( );
-    AssetGroup(const AssetGroup& obj); // copy contructor
-    ~AssetGroup( );
+	
+	AssetGroup();
+	AssetGroup( const AssetGroup &obj); // copy contructor
+	~AssetGroup();
 
-    int      id;
-    long*    members;
-    long     number_of_members;
-    wxString name;
 
-    bool can_be_picked; // Used by FindParticlesPanel to keep track of whether all images within the group are ready to be picked
+	int id;
+	long *members;
+	long number_of_members;
+	wxString name;
 
-    void SetName(wxString wanted_name);
-    void AddMember(long number_to_add);
-    void RemoveMember(long number_to_remove);
-    void RemoveAll( );
+	bool can_be_picked; // Used by FindParticlesPanel to keep track of whether all images within the group are ready to be picked
 
-    void CopyFrom(AssetGroup* other_group);
+	void SetName(wxString wanted_name);
+	void AddMember(long number_to_add);
+	void RemoveMember(long number_to_remove);
+	void RemoveAll();
 
-    long FindMember(long member_to_find);
+	void CopyFrom(AssetGroup *other_group);
 
-    AssetGroup& operator=(const AssetGroup& t);
-    AssetGroup& operator=(const AssetGroup* t);
+	long FindMember(long member_to_find);
+
+	AssetGroup & operator = (const AssetGroup &t);
+	AssetGroup & operator = (const AssetGroup *t);
+
 };
+
 
 class AssetGroupList {
 
-    long number_allocated;
+	long number_allocated;
 
-  public:
-    AssetGroupList( );
-    ~AssetGroupList( );
+public:
 
-    long        number_of_groups;
-    AssetGroup* groups;
+	AssetGroupList();
+	~AssetGroupList();
 
-    long ReturnNumberOfGroups( );
+	long number_of_groups;
+	AssetGroup *groups;
 
-    void AddGroup(wxString name);
-    void AddGroup(AssetGroup* group_to_add);
+	long ReturnNumberOfGroups();
 
-    void RemoveGroup(long number_to_remove);
-    void AddMemberToGroup(long wanted_group_number, long member_to_add);
-    long ReturnGroupMember(long wanted_group_number, long wanted_member);
-    void RemoveAssetFromExtraGroups(long wanted_asset);
-    void ShiftMembersDueToAssetRemoval(long number_to_shift_after);
-    void RemoveAll( );
+	void AddGroup(wxString name);
+	void AddGroup(AssetGroup *group_to_add);
+
+	void RemoveGroup(long number_to_remove);
+	void AddMemberToGroup(long wanted_group_number, long member_to_add);
+	long ReturnGroupMember(long wanted_group_number, long wanted_member);
+	void RemoveAssetFromExtraGroups(long wanted_asset);
+	void ShiftMembersDueToAssetRemoval(long number_to_shift_after);
+	void RemoveAll();
 };
+
+
+

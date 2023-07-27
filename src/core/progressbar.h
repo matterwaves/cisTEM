@@ -57,24 +57,28 @@
 
 class ProgressBar {
 
-  private:
-    long total_number_of_ticks;
-    long start_time;
-    long last_update_time;
-    bool limit_to_100_percent;
+private:
 
-  public:
-    // Constructors
+	long total_number_of_ticks;
+	long start_time;
+	long last_update_time;
+	bool limit_to_100_percent;
 
-    ProgressBar( );
-    ProgressBar(long wanted_total_number_of_ticks, bool wanted_limit_to_100_percent = true);
+public :
 
-    // Destructor
+	// Constructors
 
-    ~ProgressBar( );
+	ProgressBar();
+	ProgressBar(long wanted_total_number_of_ticks, bool wanted_limit_to_100_percent = true);
 
-    // Methods
+	// Destructor
 
-    virtual void Update(long current_tick);
-    virtual void CallOnUpdate( ){ }; // function that can be overidden to have control on extra things passed progressbars should do (this is primarily used for allowing GUI panels to track progress bars
+	~ProgressBar();
+
+	// Methods
+
+	virtual void Update(long current_tick);
+	virtual void CallOnUpdate() {}; // function that can be overidden to have control on extra things passed progressbars should do (this is primarily used for allowing GUI panels to track progress bars
+
+
 };

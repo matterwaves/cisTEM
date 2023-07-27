@@ -2,40 +2,42 @@
 #define __ClassificationPlotPanel__
 
 class
-        ClassificationPlotPanel : public ClassificationPlotPanelParent {
+ClassificationPlotPanel : public ClassificationPlotPanelParent
+{
 
-    wxBoxSizer* LikelihoodSizer;
-    wxBoxSizer* SigmaSizer;
-    wxBoxSizer* PercentageMovedSizer;
+	wxBoxSizer* LikelihoodSizer;
+	wxBoxSizer* SigmaSizer;
+	wxBoxSizer* PercentageMovedSizer;
 
-  public:
-    ClassificationPlotPanel(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxTAB_TRAVERSAL);
-    ~ClassificationPlotPanel( );
+public :
 
-    void Clear( );
-    void AddPoints(float round, float likelihood, float sigma, float percentage_moved);
-    void Draw( );
+	ClassificationPlotPanel(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxTAB_TRAVERSAL);
+	~ClassificationPlotPanel();
 
-    std::vector<double> round_data;
-    std::vector<double> likelihood_data;
-    std::vector<double> sigma_data;
-    std::vector<double> percentage_moved_data;
+	void Clear();
+	void AddPoints(float round, float likelihood, float sigma, float percentage_moved);
+	void Draw();
 
-    mpWindow* likelihood_plot_window;
-    mpWindow* sigma_plot_window;
-    mpWindow* percentage_moved_plot_window;
+	std::vector<double> round_data;
+	std::vector<double> likelihood_data;
+	std::vector<double> sigma_data;
+	std::vector<double> percentage_moved_data;
 
-    mpScaleX* likelihood_xaxis;
-    mpScaleX* sigma_xaxis;
-    mpScaleX* percentage_moved_xaxis;
+	mpWindow        *likelihood_plot_window;
+	mpWindow        *sigma_plot_window;
+	mpWindow        *percentage_moved_plot_window;
 
-    mpScaleY* likelihood_yaxis;
-    mpScaleY* sigma_yaxis;
-    mpScaleY* percentage_moved_yaxis;
+	mpScaleX * likelihood_xaxis;
+	mpScaleX * sigma_xaxis;
+	mpScaleX * percentage_moved_xaxis;
 
-    mpFXYVector* likelihood_vector_layer;
-    mpFXYVector* sigma_vector_layer;
-    mpFXYVector* percentage_moved_vector_layer;
+	mpScaleY * likelihood_yaxis;
+	mpScaleY * sigma_yaxis;
+	mpScaleY * percentage_moved_yaxis;
+
+	mpFXYVector* likelihood_vector_layer;
+	mpFXYVector* sigma_vector_layer;
+	mpFXYVector* percentage_moved_vector_layer;
 };
 
 #endif

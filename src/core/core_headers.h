@@ -1,36 +1,24 @@
-#ifndef SRC_PROGRAMS_CORE_CORE_HEADERS_H_
-#define SRC_PROGRAMS_CORE_CORE_HEADERS_H_
-
 typedef struct Peak {
-    float x;
-    float y;
-    float z;
-    float value;
-    long  physical_address_within_image;
+  float x;
+  float y;
+  float z;
+  float value;
+  long  physical_address_within_image;
 } Peak;
 
 typedef struct Kernel2D {
-    int   pixel_index[4];
-    float pixel_weight[4];
+  int   pixel_index[4];
+  float pixel_weight[4];
 } Kernel2D;
 
 typedef struct CurvePoint {
-    int   index_m;
-    int   index_n;
-    float value_m;
-    float value_n;
+  int   index_m;
+  int   index_n;
+  float value_m;
+  float value_n;
 } CurvePoint;
 
-// All the defines set in configure.ac
-#include <cistem_config.h>
-#ifndef _LARGE_FILE_SOURCE
-#define _LARGE_FILE_SOURCE
-#endif
-#ifndef _FILE_OFFSET_BITS
-#define _FILE_OFFSET_BITS 64
-#endif
 
-#include "../constants/constants.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -41,86 +29,82 @@ typedef struct CurvePoint {
 #include <cstdarg>
 #include <cfloat>
 #include <complex>
+const std::complex<float> I(0.0,1.0);
 #include <iterator>
 #include <utility>
 #include <vector>
-#include <unordered_map>
 #include <random>
 #include <functional>
-#ifdef __INTEL_COMPILER
-// These are in $MKLROOT/include
-#include <fftw/fftw3.h>
-#include <fftw/fftw3_mkl.h>
-#else
-// These should'nt be used, but are here for completeness.
-// See note on licensing.
 #include <fftw3.h>
-#endif
 #include <math.h>
 #include <chrono>
 #include "sqlite/sqlite3.h"
 #include <wx/txtstrm.h>
-#include <wx/wfstream.h>
 #include <wx/wx.h>
-#include <wx/defs.h>
 #include <wx/socket.h>
 #include <wx/cmdline.h>
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include <wx/dir.h>
+#include <wx/wfstream.h>
 #include <wx/tokenzr.h>
 #include <wx/textfile.h>
 #include <wx/regex.h>
 #include <wx/stackwalk.h>
 #include <wx/xml/xml.h>
 #include <wx/msgqueue.h>
-#ifdef ENABLE_WEBVIEW
-#include <wx/webview.h>
-#endif
+
 
 class StackDump : public wxStackWalker // so we can give backtraces..
 {
-  public:
-    StackDump(const char* argv0)
-        : wxStackWalker(argv0) {
+public:
+    StackDump(const char *argv0)
+        : wxStackWalker(argv0)
+    {
     }
 
-    virtual void Walk(size_t skip = 1) {
+    virtual void Walk(size_t skip = 1)
+    {
         wxPrintf("Stack dump:\n\n");
 
         wxStackWalker::Walk(skip);
     }
 
-  protected:
-    virtual void OnStackFrame(const wxStackFrame& frame) {
-        wxPrintf("[%2i] ", int(frame.GetLevel( )));
+protected:
+    virtual void OnStackFrame(const wxStackFrame& frame)
+    {
+        wxPrintf("[%2i] ", int(frame.GetLevel()));
 
-        wxString name = frame.GetName( );
-        if ( ! name.empty( ) ) {
-            wxPrintf("%-20.40s", name.mb_str( ));
+        wxString name = frame.GetName();
+        if ( !name.empty() )
+        {
+            wxPrintf("%-20.40s", name.mb_str());
         }
-        else {
-            wxPrintf("0x%08lx", (unsigned long)frame.GetAddress( ));
+        else
+        {
+            wxPrintf("0x%08lx", (unsigned long)frame.GetAddress());
         }
 
-        if ( frame.HasSourceLocation( ) ) {
+        if ( frame.HasSourceLocation() )
+        {
             wxPrintf("\t%s:%i",
-                     frame.GetFileName( ).mb_str( ),
-                     int(frame.GetLine( )));
+                   frame.GetFileName().mb_str(),
+                   int(frame.GetLine()));
         }
 
         wxPrintf("");
 
         wxString type, val;
-        for ( size_t n = 0; frame.GetParam(n, &type, &name, &val); n++ ) {
-            wxPrintf("\t%s %s = %s\n", type.mb_str( ), name.mb_str( ), val.mb_str( ));
+        for ( size_t n = 0; frame.GetParam(n, &type, &name, &val); n++ )
+        {
+            wxPrintf("\t%s %s = %s\n", type.mb_str(), name.mb_str(), val.mb_str());
+
         }
         wxPrintf("\n");
     }
 };
 
 #include "defines.h"
-#include "stopwatch.h"
 #include "cistem_parameters.h"
 #include "cistem_star_file_reader.h"
 #include "assets.h"
@@ -128,9 +112,7 @@ class StackDump : public wxStackWalker // so we can give backtraces..
 #include "socket_codes.h"
 #include "template_matching.h"
 #include "functions.h"
-#include "run_command.h"
-#include "run_profile.h"
-#include "run_profile_manager.h"
+#include "run_profiles.h"
 #include "job_packager.h"
 #include "ctf.h"
 #include "curve.h"
@@ -147,7 +129,6 @@ class StackDump : public wxStackWalker // so we can give backtraces..
 #include "empirical_distribution.h"
 #include "randomnumbergenerator.h"
 #include "image.h"
-#include "spectrum_image.h"
 #include "socket_communicator.h"
 #include "userinput.h"
 #include "symmetry_matrix.h"
@@ -181,16 +162,10 @@ class StackDump : public wxStackWalker // so we can give backtraces..
 #include "json/jsonwriter.h"
 #include "json/jsonreader.h"
 #include "json/jsonval.h"
+#include "stopwatch.h"
 #include "ccl3d.h"
 
 #ifdef EXPERIMENTAL
-#include "../../include/ieee-754-half/half.hpp"
-#include "../../include/gemmi/model.hpp"
-#include "../../include/gemmi/elem.hpp"
-#include "../../include/gemmi/mmread.hpp"
-#include "../../include/gemmi/gz.hpp"
-#include "../../include/gemmi/resinfo.hpp"
-#include "../../include/gemmi/calculate.hpp"
 #include "pdb.h"
 #include "water.h"
 #endif
@@ -198,6 +173,8 @@ class StackDump : public wxStackWalker // so we can give backtraces..
 #ifdef ENABLEGPU
 #include <cuda_runtime.h>
 #include <cuda.h>
+#include <cublas_v2.h>
+#include <cuda_fp16.h>
 #include <cuda_profiler_api.h>
 #include <cufft.h>
 #include <cufftXt.h>
@@ -205,10 +182,26 @@ class StackDump : public wxStackWalker // so we can give backtraces..
 #include <nppi_arithmetic_and_logical_operations.h>
 #include <nppi_statistics_functions.h>
 #include <npps_arithmetic_and_logical_operations.h>
+//#include <helper_functions.h>
+//#include <helper_cuda.h>
+#include <thrust/transform_reduce.h>
+#include <thrust/device_vector.h>
+#include <thrust/functional.h>
 #include <typeinfo>
 #include <limits>
 
+
+ // These headers are need so that gpu specific types can be instantiated outside the if(use_gpu) brackets.
+#include "../gpu/DeviceManager.h"
+#include "../gpu/GpuImage.h"
+#include "../gpu/Histogram.h"
+#include "../gpu/TemplateMatchingCore.h"
 #endif
+
+
+
+
+
 
 #ifdef MKL
 #define MKL_Complex8 std::complex<float>
@@ -216,5 +209,3 @@ class StackDump : public wxStackWalker // so we can give backtraces..
 #endif
 
 extern RandomNumberGenerator global_random_number_generator;
-
-#endif

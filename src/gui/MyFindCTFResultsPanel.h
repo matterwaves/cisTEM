@@ -1,8 +1,9 @@
-class MyFindCTFResultsPanel : public FindCTFResultsPanel {
-  public:
-    MyFindCTFResultsPanel(wxWindow* parent);
+class MyFindCTFResultsPanel : public FindCTFResultsPanel
+{
+	public:
+		MyFindCTFResultsPanel( wxWindow* parent );
 
-    /*
+		/*
 		void OnDefineFilterClick( wxCommandEvent& event );
 		void OnAddToGroupClick( wxCommandEvent& event );
 		void OnNextButtonClick( wxCommandEvent& event );
@@ -22,40 +23,43 @@ class MyFindCTFResultsPanel : public FindCTFResultsPanel {
 
 		void Clear();
 */
-    void OnDefineFilterClick(wxCommandEvent& event);
-    void OnUpdateUI(wxUpdateUIEvent& event);
-    void OnValueChanged(wxDataViewEvent& event);
-    void FillGroupComboBox( );
-    void FillBasedOnSelectCommand(wxString wanted_command);
-    int  ReturnRowFromAssetID(int asset_id, int start_location = 0);
-    void OnAddAllToGroupClick(wxCommandEvent& event);
-    void FillResultsPanelAndDetails(int row, int column);
-    void OnNextButtonClick(wxCommandEvent& event);
-    void OnPreviousButtonClick(wxCommandEvent& event);
-    void OnAddToGroupClick(wxCommandEvent& event);
-    void OnRemoveFromGroupClick(wxCommandEvent& event);
-    void OnJobDetailsToggle(wxCommandEvent& event);
-    void OnPlotResultsButtonClick(wxCommandEvent& event);
-    void Clear( );
+		void OnDefineFilterClick( wxCommandEvent& event );
+		void OnUpdateUI( wxUpdateUIEvent& event );
+		void OnValueChanged(wxDataViewEvent &event);
+		void FillGroupComboBox();
+		void FillBasedOnSelectCommand(wxString wanted_command);
+		int ReturnRowFromAssetID(int asset_id, int start_location = 0);
+		void OnAddAllToGroupClick( wxCommandEvent& event );
+		void FillResultsPanelAndDetails(int row, int column);
+		void OnNextButtonClick( wxCommandEvent& event );
+		void OnPreviousButtonClick( wxCommandEvent& event );
+		void OnAddToGroupClick( wxCommandEvent& event );
+		void OnRemoveFromGroupClick( wxCommandEvent& event );
+		void OnJobDetailsToggle( wxCommandEvent& event );
+		void OnPlotResultsButtonClick(wxCommandEvent& event);
+		void Clear();
 
-    int  GetFilter( );
-    void OnAllMoviesSelect(wxCommandEvent& event);
-    void OnByFilterSelect(wxCommandEvent& event);
-    void OnCharHook(wxKeyEvent& event);
+		int GetFilter();
+		void OnAllMoviesSelect( wxCommandEvent& event );
+		void OnByFilterSelect( wxCommandEvent& event );
+		void OnCharHook( wxKeyEvent& event );
 
-    int* ctf_estimation_job_ids;
-    int  number_of_ctf_estimation_jobs;
-    int* per_row_asset_id;
-    int* per_row_array_position;
-    int  number_of_assets;
 
-    int selected_row;
-    int selected_column;
+		int *ctf_estimation_job_ids;
+		int number_of_ctf_estimation_jobs;
+		int *per_row_asset_id;
+		int *per_row_array_position;
+		int number_of_assets;
 
-    bool doing_panel_fill;
+		int selected_row;
+		int selected_column;
 
-    bool is_dirty;
-    bool group_combo_is_dirty;
+		bool doing_panel_fill;
 
-    wxString current_fill_command;
+		bool is_dirty;
+		bool group_combo_is_dirty;
+
+		wxString current_fill_command;
+	
 };
+

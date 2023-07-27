@@ -1,6 +1,3 @@
-#ifndef _gui_gui_core_headers_h_
-#define _gui_gui_core_headers_h_
-
 #include <wx/artprov.h>
 #include <wx/xrc/xmlres.h>
 #include <wx/gdicmn.h>
@@ -63,7 +60,7 @@
 #include "../gui/CTF1DPanel.h"
 #include "../gui/MainFrame.h"
 #include "../gui/ErrorDialog.h"
-#include "../gui/MyAssetPanelParent.h"
+#include "../gui/MyAssetParentPanel.h"
 #include "../gui/MyMovieAssetPanel.h"
 #include "../gui/MyImageAssetPanel.h"
 #include "../gui/MyParticlePositionAssetPanel.h"
@@ -87,8 +84,7 @@
 #include "../gui/ExportRefinementPackageWizard.h"
 #include "../gui/MyNewRefinementPackageWizard.h"
 #include "../gui/MyResultsPanel.h"
-#include "../gui/ActionsPanelSpa.h"
-#include "../gui/ActionsPanelTm.h"
+#include "../gui/MyActionsPanel.h"
 #include "../gui/MyAssetsPanel.h"
 #include "../gui/MySettingsPanel.h"
 #include "../gui/PickingResultsPanel.h"
@@ -96,7 +92,6 @@
 #include "../gui/MyFrealignExportDialog.h"
 #include "../gui/MyRelionExportDialog.h"
 #include "../gui/MyRefinementPackageAssetPanel.h"
-#include "../gui/CombineRefinementPackagesWizard.h"
 #include "../gui/MyRenameDialog.h"
 #include "../gui/MyVolumeChooserDialog.h"
 #include "../gui/MyRefine2DPanel.h"
@@ -123,19 +118,14 @@
 #include "../gui/PlotCurvePanel.h"
 #include "../gui/DistributionPlotDialog.h"
 #include "../gui/RefineCTFPanel.h"
-#include "../gui/MatchTemplatePanel.h"
-#include "../gui/MatchTemplateResultsPanel.h"
-#include "../gui/RefineTemplatePanel.h"
 
 #ifdef EXPERIMENTAL
 #include "../gui/MyExperimentalPanel.h"
-#include "../gui/RefineTemplateDevPanel.h"
-#include "../gui/AtomicCoordinatesAssetPanel.h"
-#include "../gui/AtomicCoordinatesChooserDialog.h"
-#include "../gui/AtomicCoordinatesImportDialog.h"
+#include "../gui/MatchTemplatePanel.h"
+#include "../gui/MatchTemplateResultsPanel.h"
+#include "../gui/RefineTemplatePanel.h"
 #endif
-// FIXME: These and all the panel integers should be in defines as enums, and should be in their own header
-// included at the top of core headers
+
 #define REFINEMENT 0
 #define RECONSTRUCTION 1
 #define MERGE 2
@@ -144,5 +134,3 @@
 #define ALIGN_SYMMETRY 5
 #define ESTIMATE_BEAMTILT 6
 #define NOJOB 7
-
-#endif

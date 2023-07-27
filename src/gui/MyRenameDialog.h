@@ -3,16 +3,19 @@
 
 #include "ProjectX_gui.h"
 
-class MyRenameDialog : public RenameDialog {
-    friend class MyAssetPanelParent;
+class MyRenameDialog : public RenameDialog
+{
+	friend class MyAssetParentPanel;
 
-  public:
-    wxArrayLong selected_assets_array_position;
+public :
 
-    MyRenameDialog(wxWindow* parent);
-    virtual void OnCancelClick(wxCommandEvent& event);
-    virtual void OnRenameClick(wxCommandEvent& event);
-    void         SizeAndPosition( );
+	wxArrayLong selected_assets_array_position;
+
+	MyRenameDialog (wxWindow *parent);
+	virtual void OnCancelClick( wxCommandEvent& event );
+	virtual void OnRenameClick( wxCommandEvent& event );
+	void SizeAndPosition();
 };
 
 #endif
+

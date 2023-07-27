@@ -1,11 +1,5 @@
-#ifndef _src_core_defines_h_
-#define _src_core_defines_h_
-
-// clang-format off
-
-#include "../constants/constants.h"
-
 #define INTEGER_DATABASE_VERSION 2
+#define CISTEM_VERSION_TEXT "2.0.0-alpha"
 #define START_PORT 3000
 #define END_PORT 5000
 // Define PI constants
@@ -30,12 +24,6 @@
 #define VARIABLE_LENGTH  8
 #define INTEGER_UNSIGNED 9
 
-// Types of noise distributions
-namespace cistem {
-
-  enum NoiseType : int { UNIFORM, GAUSSIAN, POISSON, EXPONENTIAL, GAMMA };
-
-}
 
 // From Table 2.2 DeGraff
 #define RELATIVISTIC_VOLTAGE_100 109784.0f // Volts
@@ -47,7 +35,7 @@ namespace cistem {
 #define ELECTRON_REST_MASS 510998.0f // eV
 
 // Used in pdb.h simulate.h
-#define NUMBER_OF_ATOM_TYPES 22
+#define NUMBER_OF_ATOM_TYPES 21
 
 #define MINIMUM_BEAM_TILT_SIGNIFICANCE_SCORE 10.0f
 
@@ -62,9 +50,6 @@ namespace cistem {
 #define ANSI_UNDERLINE_OFF "\e[24m"
 #define ANSI_BLINK_SLOW "\x1b[5m"
 #define ANSI_BLINK_OFF "\x1b[25m"
-#define ANSI_BOLD "\033[1m"
-#define ANSI_BOLD_OFF "\033[0m"
-
 
 #define SCALED_IMAGE_SIZE 1200
 
@@ -97,6 +82,3 @@ namespace cistem {
 WX_DECLARE_OBJARRAY(float, wxArrayFloat);
 WX_DECLARE_OBJARRAY(bool, wxArrayBool);
 
-// clang-format on
-
-#endif /* defines.h */

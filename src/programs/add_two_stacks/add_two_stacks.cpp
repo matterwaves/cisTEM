@@ -1,77 +1,89 @@
 #include "../../core/core_headers.h"
 
 class
-        AddTwoStacks : public MyApp {
+AddTwoStacks : public MyApp
+{
 
-  public:
-    bool DoCalculation( );
-    void DoInteractiveUserInput( );
+	public:
 
-  private:
+	bool DoCalculation();
+	void DoInteractiveUserInput();
+
+	private:
 };
+
+
 
 IMPLEMENT_APP(AddTwoStacks)
 
 // override the DoInteractiveUserInput
 
-void AddTwoStacks::DoInteractiveUserInput( ) {
+void AddTwoStacks::DoInteractiveUserInput()
+{
 
-    int new_z_size = 1;
+	int new_z_size = 1;
 
-    UserInput* my_input = new UserInput("AddTwoStacks", 1.0);
+	UserInput *my_input = new UserInput("AddTwoStacks", 1.0);
 
-    std::string input_filename_one = my_input->GetFilenameFromUser("Input image file name #1", "Filename of stack to be added to", "input_stack1.mrc", true);
-    std::string input_filename_two = my_input->GetFilenameFromUser("Input image file name #2", "Filename of stack to be added", "input_stack2.mrc", true);
-    std::string output_filename    = my_input->GetFilenameFromUser("Output image file name", "the added result", "output.mrc", false);
+	std::string input_filename_one	=		my_input->GetFilenameFromUser("Input image file name #1", "Filename of stack to be added to", "input_stack1.mrc", true );
+	std::string input_filename_two	=		my_input->GetFilenameFromUser("Input image file name #2", "Filename of stack to be added", "input_stack2.mrc", true );
+	std::string output_filename		=		my_input->GetFilenameFromUser("Output image file name", "the added result", "output.mrc", false );
 
-    delete my_input;
+	delete my_input;
 
-    my_current_job.Reset(3);
-    my_current_job.ManualSetArguments("ttt", input_filename_one.c_str( ), input_filename_two.c_str( ), output_filename.c_str( ));
+	my_current_job.Reset(3);
+	my_current_job.ManualSetArguments("ttt", input_filename_one.c_str(), input_filename_two.c_str(), output_filename.c_str());
+
 }
 
 // override the do calculation method which will be what is actually run..
 
-bool AddTwoStacks::DoCalculation( ) {
-    std::string input_filename_one = my_current_job.arguments[0].ReturnStringArgument( );
-    std::string input_filename_two = my_current_job.arguments[1].ReturnStringArgument( );
-    std::string output_filename    = my_current_job.arguments[2].ReturnStringArgument( );
+bool AddTwoStacks::DoCalculation()
+{
+	std::string	input_filename_one						= my_current_job.arguments[0].ReturnStringArgument();
+	std::string	input_filename_two						= my_current_job.arguments[1].ReturnStringArgument();
+	std::string	output_filename 						= my_current_job.arguments[2].ReturnStringArgument();
 
-    ImageFile my_input_file_one(input_filename_one, false);
-    ImageFile my_input_file_two(input_filename_two, false);
-    MRCFile   my_output_file(output_filename, true);
 
-    if ( my_input_file_one.ReturnXSize( ) != my_input_file_two.ReturnXSize( ) || my_input_file_one.ReturnYSize( ) != my_input_file_two.ReturnYSize( ) ) {
-        MyPrintfRed("\n\n Error: Image dimensions are not the same\n\n");
-        exit(-1);
-    }
+	ImageFile my_input_file_one(input_filename_one,false);
+	ImageFile my_input_file_two(input_filename_two,false);
+	MRCFile my_output_file(output_filename,true);
 
-    if ( my_input_file_one.ReturnNumberOfSlices( ) != my_input_file_two.ReturnNumberOfSlices( ) ) {
-        MyPrintfRed("\n\n Error: Two stack contain different number of images\n\n");
-        exit(-1);
-    }
+	if (my_input_file_one.ReturnXSize() != my_input_file_two.ReturnXSize() || my_input_file_one.ReturnYSize() != my_input_file_two.ReturnYSize())
+	{
+		MyPrintfRed("\n\n Error: Image dimensions are not the same\n\n");
+		exit(-1);
+	}
 
-    Image my_image_one;
-    Image my_image_two;
+	if (my_input_file_one.ReturnNumberOfSlices() != my_input_file_two.ReturnNumberOfSlices())
+	{
+		MyPrintfRed("\n\n Error: Two stack contain different number of images\n\n");
+		exit(-1);
+	}
 
-    float input_pixel_size = my_input_file_one.ReturnPixelSize( );
+	Image my_image_one;
+	Image my_image_two;
 
-    wxPrintf("\nAdding Images...\n\n");
-    ProgressBar* my_progress = new ProgressBar(my_input_file_one.ReturnNumberOfSlices( ));
+	float input_pixel_size = my_input_file_one.ReturnPixelSize();
 
-    for ( long image_counter = 0; image_counter < my_input_file_one.ReturnNumberOfSlices( ); image_counter++ ) {
-        my_image_one.ReadSlice(&my_input_file_one, image_counter + 1);
-        my_image_two.ReadSlice(&my_input_file_two, image_counter + 1);
-        my_image_one.AddImage(&my_image_two);
-        my_image_one.WriteSlice(&my_output_file, image_counter + 1);
-        my_progress->Update(image_counter + 1);
-    }
+	wxPrintf("\nAdding Images...\n\n");
+	ProgressBar *my_progress = new ProgressBar(my_input_file_one.ReturnNumberOfSlices());
 
-    delete my_progress;
-    wxPrintf("\n\n");
+	for ( long image_counter = 0; image_counter < my_input_file_one.ReturnNumberOfSlices(); image_counter++ )
+	{
+		my_image_one.ReadSlice(&my_input_file_one,image_counter+1);
+		my_image_two.ReadSlice(&my_input_file_two,image_counter+1);
+		my_image_one.AddImage(&my_image_two);
+		my_image_one.WriteSlice(&my_output_file,image_counter+1);
+		my_progress->Update(image_counter + 1);
+	}
 
-    my_output_file.SetPixelSize(input_pixel_size);
-    my_output_file.WriteHeader( );
+	delete my_progress;
+	wxPrintf("\n\n");
 
-    return true;
+
+	my_output_file.SetPixelSize(input_pixel_size);
+	my_output_file.WriteHeader();
+
+	return true;
 }

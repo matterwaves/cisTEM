@@ -1,61 +1,66 @@
 #ifndef __FindCTFPanel__
 #define __FindCTFPanel__
 
-class MyFindCTFPanel : public FindCTFPanel {
-    long my_job_id;
 
-    int length_of_process_number;
+class MyFindCTFPanel : public FindCTFPanel
+{
+		long my_job_id;
 
-    JobTracker my_job_tracker;
+		int length_of_process_number;
 
-    bool running_job;
+		JobTracker my_job_tracker;
 
-    Image    result_image;
-    wxBitmap result_bitmap;
+		bool running_job;
 
-    AssetGroup active_group;
+		Image result_image;
+		wxBitmap result_bitmap;
 
-  public:
-    MyFindCTFPanel(wxWindow* parent);
-    JobResult* buffered_results;
+		AssetGroup active_group;
 
-    bool group_combo_is_dirty;
-    bool run_profiles_are_dirty;
-    long time_of_last_result_update;
+public:
 
-    // methods
+		MyFindCTFPanel( wxWindow* parent );
+		JobResult *buffered_results;
 
-    void OnMovieRadioButton(wxCommandEvent& event);
-    void OnImageRadioButton(wxCommandEvent& event);
-    void OnFindAdditionalPhaseCheckBox(wxCommandEvent& event);
-    void OnRestrainAstigmatismCheckBox(wxCommandEvent& event);
-    void WriteResultToDataBase( );
-    void OnExpertOptionsToggle(wxCommandEvent& event);
-    void OnUpdateUI(wxUpdateUIEvent& event);
-    void FillGroupComboBox( );
-    void FillRunProfileComboBox( );
-    void StartEstimationClick(wxCommandEvent& event);
-    void FinishButtonClick(wxCommandEvent& event);
-    void TerminateButtonClick(wxCommandEvent& event);
-    //void Refresh();
-    void SetInfo( );
-    void OnInfoURL(wxTextUrlEvent& event);
-    void EnableMovieProcessingIfAppropriate( );
+		bool group_combo_is_dirty;
+		bool run_profiles_are_dirty;
+		long time_of_last_result_update;
 
-    void OnSocketJobResultMsg(JobResult& received_result);
-    void SetNumberConnectedText(wxString wanted_text);
-    void SetTimeRemainingText(wxString wanted_text);
-    void OnSocketAllJobsFinished( );
+		// methods
 
-    void WriteInfoText(wxString text_to_write);
-    void WriteErrorText(wxString text_to_write);
+		void OnMovieRadioButton(wxCommandEvent& event );
+		void OnImageRadioButton(wxCommandEvent& event );
+		void OnFindAdditionalPhaseCheckBox(wxCommandEvent& event );
+		void OnRestrainAstigmatismCheckBox(wxCommandEvent& event );
+		void WriteResultToDataBase();
+		void OnExpertOptionsToggle( wxCommandEvent& event );
+		void OnUpdateUI( wxUpdateUIEvent& event );
+		void FillGroupComboBox();
+		void FillRunProfileComboBox();
+		void StartEstimationClick( wxCommandEvent& event );
+		void FinishButtonClick( wxCommandEvent& event );
+		void TerminateButtonClick( wxCommandEvent& event );
+	//void Refresh();
+		void SetInfo();
+		void OnInfoURL(wxTextUrlEvent& event);
+		void EnableMovieProcessingIfAppropriate();
 
-    void ProcessResult(JobResult* result_to_process);
-    void ProcessAllJobsFinished( );
-    void UpdateProgressBar( );
+		void OnSocketJobResultMsg(JobResult &received_result);
+		void SetNumberConnectedText(wxString wanted_text);
+		void SetTimeRemainingText(wxString wanted_text);
+		void OnSocketAllJobsFinished();
 
-    void Reset( );
-    void ResetDefaults( );
+		void WriteInfoText(wxString text_to_write);
+		void WriteErrorText(wxString text_to_write);
+
+		void ProcessResult(JobResult *result_to_process);
+		void ProcessAllJobsFinished();
+		void UpdateProgressBar();
+
+		void Reset();
+		void ResetDefaults();
+
+
 };
 
 #endif // __AlignMoviesPanel__

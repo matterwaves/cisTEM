@@ -41,57 +41,63 @@
 // </description>
 // </class_header>
 
+
 class DownhillSimplex {
 
-    ///////////////////////////////////////////////////////////////////////////////
-    //    Private stuff, these are the functions stolen from NR, they don't      //
-    //    need to be called directly.                                            //
-    ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+//    Private stuff, these are the functions stolen from NR, they don't      //
+//    need to be called directly.                                            //
+///////////////////////////////////////////////////////////////////////////////
 
-  private:
-    void   amoeba(double** p, double y[], long ndim, double ftol, double funk(double[]), long* nfunk);
-    void   amoeba(double** p, double y[], long ndim, double ftol, void* pt2Object, double (*callback)(void* pt2Object, double[]), long* nfunk);
-    double amotry(double** p, double y[], double psum[], long ndim, double funk(double[]), long ihi, double fac);
-    double amotry(double** p, double y[], double psum[], long ndim, void* pt2Object, double (*callback)(void* pt2Object, double[]), long ihi, double fac);
+private :
 
-    double*  dvector(long nl, long nh);
-    double** dmatrix(long nrl, long nrh, long ncl, long nch);
+     void amoeba(double **p, double y[], long ndim, double ftol, double funk(double []), long *nfunk);
+     void amoeba(double **p, double y[], long ndim, double ftol, void *pt2Object, double (*callback)(void* pt2Object, double []), long *nfunk);
+     double amotry(double **p,double y[], double psum[], long ndim, double funk(double []), long ihi, double fac);
+     double amotry(double **p,double y[], double psum[], long ndim, void *pt2Object, double (*callback)(void* pt2Object, double []), long ihi, double fac);
 
-    void free_dvector(double* v, long nl, long nh);
-    void free_dmatrix(double** m, long nrl, long nrh, long ncl, long nch);
+     double *dvector(long nl, long nh);
+     double **dmatrix(long nrl, long nrh, long ncl, long nch);
 
-    double** p; // input values
-    double*  y; // evaluated results
+     void free_dvector(double *v, long nl, long nh);
+     void free_dmatrix(double **m, long nrl, long nrh, long ncl, long nch);
 
-  public:
-    double** initial_values;
-    double*  minimised_values;
-    double*  value_scalers;
+     double **p; // input values
+     double *y; // evaluated results
 
-    long number_of_dimensions;
+     public:
 
-    wxDateTime time_start;
-    wxDateTime time_end;
+     double **initial_values;
+     double *minimised_values;
+     double *value_scalers;
 
-    double tolerance;
-    void   MinimizeFunction(void* pt2Object, double (*callback)(void* pt2Object, double[]));
-    void   Setup( );
+     long number_of_dimensions;
 
-  public:
-    //   Constructors
+     wxDateTime time_start;
+     wxDateTime time_end;
 
-    DownhillSimplex( );
-    DownhillSimplex(long set_number_of_dimensions);
 
-    //   Destructors
+     double tolerance;
+     void MinimizeFunction(void *pt2Object, double (*callback)(void* pt2Object, double []));
+     void Setup();
 
-    ~DownhillSimplex( );
+public:
 
-    //   Functions
+//   Constructors
 
-    void MinimizeFunction(double function_to_min(double[]));
-    void SetIinitalValues(double* intial_values, double* wanted_range);
-    void GetMinimizedValues(double output_values[]);
+     DownhillSimplex();
+     DownhillSimplex(long set_number_of_dimensions);
 
-    wxTimeSpan ReturnTimeSpanOfMinimization( ) { return time_end - time_start; }
+//   Destructors
+
+     ~DownhillSimplex();
+
+//   Functions
+
+     void MinimizeFunction(double function_to_min(double []));
+     void SetIinitalValues(double *intial_values, double *wanted_range);
+     void GetMinimizedValues(double output_values[]);
+     wxTimeSpan ReturnTimeSpanOfMinimization() {return time_end-time_start;}
+
+
 };

@@ -1,60 +1,68 @@
 class RefinementPackageParticleInfo {
 
-  public:
-    RefinementPackageParticleInfo( );
-    ~RefinementPackageParticleInfo( );
+public :
+	RefinementPackageParticleInfo();
+	~RefinementPackageParticleInfo();
 
-    long  parent_image_id;
-    long  position_in_stack;
-    long  original_particle_position_asset_id;
-    float x_pos;
-    float y_pos;
-    float pixel_size;
-    float defocus_1;
-    float defocus_2;
-    float defocus_angle;
-    float phase_shift;
-    float spherical_aberration;
-    float amplitude_contrast;
-    float microscope_voltage;
-    int   assigned_subset;
+	long parent_image_id;
+	long position_in_stack;
+	long original_particle_position_asset_id;
+	float x_pos;
+	float y_pos;
+	float pixel_size;
+	float defocus_1;
+	float defocus_2;
+	float defocus_angle;
+	float phase_shift;
+	float spherical_aberration;
+	float amplitude_contrast;
+	float microscope_voltage;
+	int assigned_subset;
 };
 
+
 WX_DECLARE_OBJARRAY(RefinementPackageParticleInfo, ArrayOfRefinmentPackageParticleInfos);
+
 
 class RefinementPackage {
 
   public:
-    RefinementPackage( );
-    ~RefinementPackage( );
 
-    long     asset_id;
-    wxString stack_filename;
-    wxString name;
-    int      stack_box_size;
-    float    output_pixel_size;
+	RefinementPackage();
+	~RefinementPackage();
 
-    int number_of_classes;
+	long asset_id;
+	wxString stack_filename;
+	wxString name;
+	int stack_box_size;
+	float output_pixel_size;
 
-    wxString symmetry;
-    double   estimated_particle_size_in_angstroms;
-    double   estimated_particle_weight_in_kda;
-    double   lowest_resolution_of_intial_parameter_generated_3ds;
+	int number_of_classes;
 
-    bool stack_has_white_protein;
+	wxString symmetry;
+	double estimated_particle_size_in_angstroms;
+	double estimated_particle_weight_in_kda;
+	double lowest_resolution_of_intial_parameter_generated_3ds;
 
-    int  number_of_run_refinments;
-    long last_refinment_id;
+	bool stack_has_white_protein;
 
-    wxArrayLong references_for_next_refinement;
-    wxArrayLong refinement_ids;
-    wxArrayLong classification_ids;
 
-    ArrayOfRefinmentPackageParticleInfos contained_particles;
+	int number_of_run_refinments;
+	long last_refinment_id;
 
-    RefinementPackageParticleInfo ReturnParticleInfoByPositionInStack(long wanted_position_in_stack);
+	wxArrayLong references_for_next_refinement;
+	wxArrayLong refinement_ids;
+	wxArrayLong classification_ids;
 
-    long ReturnLastRefinementID( );
+	ArrayOfRefinmentPackageParticleInfos contained_particles;
+
+	RefinementPackageParticleInfo ReturnParticleInfoByPositionInStack(long wanted_position_in_stack);
+
+	long ReturnLastRefinementID();
+
+
 };
 
 WX_DECLARE_OBJARRAY(RefinementPackage, ArrayOfRefinementPackages);
+
+

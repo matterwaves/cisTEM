@@ -9,70 +9,71 @@
 
 #include <wx/dataview.h>
 
-class ResultsDataViewListCtrl : public wxDataViewListCtrl {
-  protected:
-    wxWindow* my_parent;
-    wxIcon    checked_icon;
-    wxIcon    unchecked_icon;
-    wxIcon    checked_eye_icon;
-    wxIcon    unchecked_eye_icon;
+class ResultsDataViewListCtrl : public wxDataViewListCtrl
+{
+	protected:
 
-    // TODO: shouldn't these really be called current_eye_row and current_eye_column?
-    int currently_selected_row;
-    int currently_selected_column;
-    int currently_active_job_id;
+	wxWindow *my_parent;
+	wxIcon checked_icon;
+	wxIcon unchecked_icon;
+	wxIcon checked_eye_icon;
+	wxIcon unchecked_eye_icon;
 
-  public:
-    std::string my_parents_name;
-    void (*OnHeaderClickInterrupt)( );
+	// TODO: shouldn't these really be called current_eye_row and current_eye_column?
+	int currently_selected_row;
+	int currently_selected_column;
 
-    ResultsDataViewListCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pt, const wxSize& sz, long style);
-    ~ResultsDataViewListCtrl( );
-    void AppendCheckColumn(wxString column_title);
+	public:
 
-    void Deselect( );
-    void UncheckItem(const int row, const int column);
-    void CheckItem(const int row, const int column);
-    void ChangeDisplayTo(const int row, const int column);
+	ResultsDataViewListCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pt, const wxSize& sz, long style);
+	~ResultsDataViewListCtrl();
+	void AppendCheckColumn(wxString column_title);
 
-    void OnSelectionChange(wxDataViewEvent& event);
-    void OnContextMenu(wxDataViewEvent& event);
-    void OnValueChanged(wxDataViewEvent& event);
-    void OnHeaderClick(wxDataViewEvent& event);
+	void Deselect();
+	void UncheckItem(const int row, const int column);
+	void CheckItem(const int row, const int column);
+	void ChangeDisplayTo(const int row, const int column);
 
-    void NextEye( );
-    void PreviousEye( );
+	void OnSelectionChange(wxDataViewEvent &event);
+	void OnContextMenu(wxDataViewEvent &event);
+	void OnValueChanged(wxDataViewEvent &event);
+	void OnHeaderClick(wxDataViewEvent &event);
 
-    int ReturnCheckedColumn(int wanted_row);
 
-    inline int ReturnEyeColumn( ) { return currently_selected_column; };
+	void NextEye();
+	void PreviousEye();
 
-    inline int ReturnEyeRow( ) { return currently_selected_row; };
+	int ReturnCheckedColumn(int wanted_row);
+	inline int ReturnEyeColumn(){return currently_selected_column;};
+	inline int ReturnEyeRow(){return currently_selected_row;};
+	void Clear();
 
-    inline int ReturnActiveJobID( ) { return currently_active_job_id; }
+	void SizeColumns();
 
-    void Clear( );
-
-    void SizeColumns( );
 };
 
-class CheckboxRenderer : public wxDataViewCustomRenderer {
-  public:
-    static wxBitmap checked_bmp;
-    static wxBitmap unchecked_bmp;
-    static wxBitmap checked_eye_bmp;
-    static wxBitmap unchecked_eye_bmp;
 
-    long current_mode;
+class CheckboxRenderer : public wxDataViewCustomRenderer
+{
+public:
+	static wxBitmap checked_bmp;
+	static wxBitmap unchecked_bmp;
+	static wxBitmap checked_eye_bmp;
+	static wxBitmap unchecked_eye_bmp;
 
-    CheckboxRenderer(const wxString& varianttype, wxDataViewCellMode mode, int align);
+	long current_mode;
 
-    bool ActivateCell(const wxRect& cell, wxDataViewModel* model, const wxDataViewItem& item, unsigned int col, const wxMouseEvent* mouseEvent);
-    bool GetValue(wxVariant& value) const;
-    bool SetValue(const wxVariant& value);
-    bool Render(wxRect cell, wxDC* dc, int state);
+	CheckboxRenderer(const wxString &varianttype, wxDataViewCellMode mode, int align);
 
-    wxSize GetSize( ) const;
+	bool ActivateCell(const wxRect & 	cell, wxDataViewModel * 	model,	const wxDataViewItem & 	item,	unsigned int 	col,const wxMouseEvent * 	mouseEvent	);
+	bool GetValue(wxVariant &value) const;
+	bool SetValue(const wxVariant &value);
+	bool Render(wxRect 	cell, wxDC *dc,	int 	state);
+
+	wxSize GetSize() const;
+
 };
 
 #endif
+
+

@@ -2,21 +2,26 @@
 #define __MyAddRunCommandDialog__
 
 /** Implementing AddRunCommandDialog */
-class MyAddRunCommandDialog : public AddRunCommandDialog {
-    MyRunProfilesPanel* my_parent;
+class MyAddRunCommandDialog : public AddRunCommandDialog
+{
+	MyRunProfilesPanel *my_parent;
 
-  public:
-    /** Constructor */
-    MyAddRunCommandDialog(MyRunProfilesPanel* parent);
+	public:
 
-    void ProcessResult( );
 
-    void OnOKClick(wxCommandEvent& event);
-    void OnCancelClick(wxCommandEvent& event);
-    void OnEnter(wxCommandEvent& event);
-    void OnOverrideCheckbox(wxCommandEvent& event);
 
-    //// end generated class members
+		/** Constructor */
+		MyAddRunCommandDialog( MyRunProfilesPanel *parent );
+
+		void ProcessResult();
+
+		void OnOKClick( wxCommandEvent& event );
+		void OnCancelClick( wxCommandEvent& event );
+		void OnEnter( wxCommandEvent& event );
+		void OnOverrideCheckbox( wxCommandEvent& event );
+
+	//// end generated class members
+	
 };
 
 #endif // __MyAddRunCommandDialog__

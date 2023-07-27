@@ -1,45 +1,49 @@
-class MyMovieAlignResultsPanel : public MovieAlignResultsPanel {
-  public:
-    MyMovieAlignResultsPanel(wxWindow* parent);
+class MyMovieAlignResultsPanel : public MovieAlignResultsPanel
+{
+	public:
+		MyMovieAlignResultsPanel( wxWindow* parent );
 
-    void JunkMe(wxCommandEvent& event);
-    void OnDefineFilterClick(wxCommandEvent& event);
-    void OnAddToGroupClick(wxCommandEvent& event);
-    void OnRemoveFromGroupClick(wxCommandEvent& event);
-    void OnNextButtonClick(wxCommandEvent& event);
-    void OnPreviousButtonClick(wxCommandEvent& event);
-    void OnAddAllToGroupClick(wxCommandEvent& event);
-    void OnUpdateUI(wxUpdateUIEvent& event);
-    void OnShowTypeRadioBoxChange(wxCommandEvent& event);
-    void OnJobDetailsToggle(wxCommandEvent& event);
 
-    void OnAllMoviesSelect(wxCommandEvent& event);
-    void OnByFilterSelect(wxCommandEvent& event);
-    void OnCharHook(wxKeyEvent& event);
+		void JunkMe(wxCommandEvent & event);
+		void OnDefineFilterClick( wxCommandEvent& event );
+		void OnAddToGroupClick( wxCommandEvent& event );
+		void OnRemoveFromGroupClick( wxCommandEvent& event );
+		void OnNextButtonClick( wxCommandEvent& event );
+		void OnPreviousButtonClick( wxCommandEvent& event );
+		void OnAddAllToGroupClick( wxCommandEvent& event );
+		void OnUpdateUI( wxUpdateUIEvent& event );
+		void OnShowTypeRadioBoxChange(wxCommandEvent& event);
+		void OnJobDetailsToggle( wxCommandEvent& event );
 
-    int GetFilter( );
+		void OnAllMoviesSelect( wxCommandEvent& event );
+		void OnByFilterSelect( wxCommandEvent& event );
+		void OnCharHook( wxKeyEvent& event );
 
-    void OnValueChanged(wxDataViewEvent& event);
-    void DrawCurveAndFillDetails(int row, int column);
-    int  ReturnRowFromAssetID(int asset_id, int start_location = 0);
-    void FillBasedOnSelectCommand(wxString wanted_command);
-    void Clear( );
+		int GetFilter();
 
-    void FillGroupComboBox( );
+		void OnValueChanged(wxDataViewEvent &event);
+		void DrawCurveAndFillDetails(int row, int column);
+		int ReturnRowFromAssetID(int asset_id, int start_location = 0);
+		void FillBasedOnSelectCommand(wxString wanted_command);
+		void Clear();
 
-    int* alignment_job_ids;
-    int  number_of_alignmnet_jobs;
-    int* per_row_asset_id;
-    int* per_row_array_position;
-    int  number_of_assets;
+		void FillGroupComboBox();
 
-    int selected_row;
-    int selected_column;
+		int *alignment_job_ids;
+		int number_of_alignmnet_jobs;
+		int *per_row_asset_id;
+		int *per_row_array_position;
+		int number_of_assets;
 
-    bool doing_panel_fill;
+		int selected_row;
+		int selected_column;
 
-    bool is_dirty;
-    bool group_combo_is_dirty;
+		bool doing_panel_fill;
 
-    wxString current_fill_command;
+		bool is_dirty;
+		bool group_combo_is_dirty;
+
+		wxString current_fill_command;
+	
 };
+

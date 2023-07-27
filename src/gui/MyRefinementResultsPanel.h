@@ -1,37 +1,45 @@
-class MyRefinementResultsPanel : public RefinementResultsPanel {
+class MyRefinementResultsPanel : public RefinementResultsPanel
+{
 
-  public:
-    bool refinement_package_is_dirty;
-    bool input_params_are_dirty;
 
-    long        refinement_id_of_buffered_refinement;
-    Refinement* currently_displayed_refinement;
-    Refinement* buffered_full_refinement;
+	public:
 
-    MyRefinementResultsPanel(wxWindow* parent);
-    void FillRefinementPackageComboBox(void);
-    void FillInputParametersComboBox(void);
-    void FillAngles(int wanted_class);
-    void DrawOrthViews( );
+	bool refinement_package_is_dirty;
+	bool input_params_are_dirty;
 
-    void OnUpdateUI(wxUpdateUIEvent& event);
+	long refinement_id_of_buffered_refinement;
+	Refinement *currently_displayed_refinement;
+	Refinement *buffered_full_refinement;
 
-    void OnRefinementPackageComboBox(wxCommandEvent& event);
-    void OnInputParametersComboBox(wxCommandEvent& event);
-    void OnDisplayTabChange(wxAuiNotebookEvent& event);
-    void OnJobDetailsToggle(wxCommandEvent& event);
+	MyRefinementResultsPanel( wxWindow* parent );
+	void FillRefinementPackageComboBox(void);
+	void FillInputParametersComboBox(void);
+	void FillAngles(int wanted_class);
+	void DrawOrthViews();
 
-    int current_class;
+	void OnUpdateUI( wxUpdateUIEvent& event );
 
-    void OnClassComboBoxChange(wxCommandEvent& event);
-    void AngularPlotPopupClick(wxCommandEvent& event);
-    void PopupParametersClick(wxCommandEvent& event);
+	void OnRefinementPackageComboBox( wxCommandEvent& event );
+	void OnInputParametersComboBox( wxCommandEvent& event );
+	void OnDisplayTabChange(wxAuiNotebookEvent& event);
+	void OnJobDetailsToggle( wxCommandEvent& event );
 
-    void UpdateCachedRefinement( );
-    void UpdateBufferedFullRefinement( );
+	int current_class;
 
-    void WriteJobInfo(int wanted_class);
-    void ClearJobInfo( );
+	void OnClassComboBoxChange( wxCommandEvent& event );
+	void AngularPlotPopupClick(wxCommandEvent& event);
+	void PopupParametersClick(wxCommandEvent& event);
 
-    void Clear( );
+	void UpdateCachedRefinement();
+	void UpdateBufferedFullRefinement();
+
+	void WriteJobInfo(int wanted_class);
+	void ClearJobInfo();
+
+	void Clear();
+
+
+
+
 };
+

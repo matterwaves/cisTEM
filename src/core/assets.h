@@ -3,125 +3,114 @@
 
 class Asset {
 
-  public:
-    int        asset_id;
-    int        parent_id;
-    wxFileName filename;
-    bool       is_valid;
-    wxString   asset_name;
+public :
 
-    Asset( );
-    virtual ~Asset( );
+	int asset_id;
+	int parent_id;
+	wxFileName filename;
+	bool is_valid;
+	wxString asset_name;
 
-    // pure virtual
+	Asset();
+	virtual ~Asset();
 
-    wxString ReturnFullPathString( );
-    wxString ReturnShortNameString( );
+	// pure virtual
+
+
+	wxString ReturnFullPathString();
+	wxString ReturnShortNameString();
+
 };
 
 class MovieAsset : public Asset {
 
   public:
-    MovieAsset( );
-    MovieAsset(wxString wanted_filename);
-    ~MovieAsset( );
 
-    int position_in_stack;
+	MovieAsset();
+	MovieAsset(wxString wanted_filename);
+	~MovieAsset();
 
-    int x_size;
-    int y_size;
-    int number_of_frames;
-    int eer_frames_per_image;
-    int eer_super_res_factor;
+	int position_in_stack;
 
-    double pixel_size;
-    double microscope_voltage;
-    double spherical_aberration;
-    double dose_per_frame;
-    double total_dose;
+	int x_size;
+	int y_size;
+	int number_of_frames;
+	int eer_frames_per_image;
+	int eer_super_res_factor;
+	
 
-    wxString gain_filename;
-    wxString dark_filename;
+	double pixel_size;
+	double microscope_voltage;
+	double spherical_aberration;
+	double dose_per_frame;
+	double total_dose;
 
-    double output_binning_factor; // If this is a super-resolution movie, but we never intend to use the "super resolution" part of the spectrum, this factor should be > 1
+	wxString gain_filename;
+	wxString dark_filename;
 
-    bool   correct_mag_distortion;
-    double mag_distortion_angle;
-    double mag_distortion_major_scale;
-    double mag_distortion_minor_scale;
+	double output_binning_factor; // If this is a super-resolution movie, but we never intend to use the "super resolution" part of the spectrum, this factor should be > 1
 
-    bool protein_is_white;
+	bool correct_mag_distortion;
+	double mag_distortion_angle;
+	double mag_distortion_major_scale;
+	double mag_distortion_minor_scale;
 
-    void Update(wxString wanted_filename, int assume_number_of_frames = 0);
-    //void Recheck_if_valid();
-    void CopyFrom(Asset* other_asset);
-    //long FindMember(long member_to_find);
-};
+	bool protein_is_white;
 
-class MovieMetadataAsset : public Asset {
+	void Update(wxString wanted_filename, int assume_number_of_frames = 0);
+	//void Recheck_if_valid();
+	void CopyFrom(Asset *other_asset);
+	//long FindMember(long member_to_find);
 
-  public:
-    MovieMetadataAsset( );
-    ~MovieMetadataAsset( );
-
-    long       movie_asset_id;
-    wxString   metadata_source;
-    wxString   content_json;
-    double     tilt_angle;
-    double     stage_position_x;
-    double     stage_position_y;
-    double     stage_position_z;
-    double     image_shift_x;
-    double     image_shift_y;
-    double     exposure_dose;
-    wxDateTime acquisition_time;
 };
 
 class ImageAsset : public Asset {
 
   public:
-    ImageAsset( );
-    ImageAsset(wxString wanted_filename);
-    ~ImageAsset( );
 
-    int position_in_stack;
-    int alignment_id;
-    int ctf_estimation_id;
+	ImageAsset();
+	ImageAsset(wxString wanted_filename);
+	~ImageAsset();
 
-    int x_size;
-    int y_size;
+	int position_in_stack;
+	int alignment_id;
+	int ctf_estimation_id;
 
-    double pixel_size;
-    double microscope_voltage;
-    double spherical_aberration;
+	int x_size;
+	int y_size;
 
-    bool protein_is_white;
+	double pixel_size;
+	double microscope_voltage;
+	double spherical_aberration;
 
-    void Update(wxString wanted_filename);
-    void CopyFrom(Asset* other_asset);
+	bool protein_is_white;
+
+	void Update(wxString wanted_filename);
+	void CopyFrom(Asset *other_asset);
 };
 
 class ParticlePositionAsset : public Asset {
 
   public:
-    ParticlePositionAsset( );
-    ParticlePositionAsset(const float& wanted_x_in_angstroms, const float& wanted_y_in_angstroms);
-    ~ParticlePositionAsset( );
 
-    void Reset( );
+	ParticlePositionAsset();
+	ParticlePositionAsset(const float &wanted_x_in_angstroms, const float &wanted_y_in_angstroms);
+	~ParticlePositionAsset();
 
-    int picking_id;
-    int pick_job_id;
-    int parent_template_id;
+	void Reset();
 
-    double x_position;
-    double y_position;
-    double peak_height;
-    double template_phi;
-    double template_theta;
-    double template_psi;
+	int picking_id;
+	int pick_job_id;
+	int parent_template_id;
 
-    void CopyFrom(Asset* other_asset);
+	double x_position;
+	double y_position;
+	double peak_height;
+	double template_phi;
+	double template_theta;
+	double template_psi;
+
+	void CopyFrom(Asset *other_asset);
 };
 
 WX_DECLARE_OBJARRAY(ParticlePositionAsset, ArrayOfParticlePositionAssets);
@@ -129,49 +118,25 @@ WX_DECLARE_OBJARRAY(ParticlePositionAsset, ArrayOfParticlePositionAssets);
 class VolumeAsset : public Asset {
 
   public:
-    VolumeAsset( );
-    VolumeAsset(wxString wanted_filename);
-    ~VolumeAsset( );
 
-    long reconstruction_job_id;
+	VolumeAsset();
+	VolumeAsset(wxString wanted_filename);
+	~VolumeAsset();
 
-    wxFileName half_map_1_filename;
-    wxFileName half_map_2_filename;
+	long reconstruction_job_id;
 
-    int x_size;
-    int y_size;
-    int z_size;
+	wxFileName half_map_1_filename;
+	wxFileName half_map_2_filename;
 
-    double pixel_size;
+	int x_size;
+	int y_size;
+	int z_size;
 
-    void Update(wxString wanted_filename);
-    void CopyFrom(Asset* other_asset);
+	double pixel_size;
+
+	void Update(wxString wanted_filename);
+	void CopyFrom(Asset *other_asset);
 };
-
-#ifdef EXPERIMENTAL
-class AtomicCoordinatesAsset : public Asset {
-
-  public:
-    AtomicCoordinatesAsset( );
-    AtomicCoordinatesAsset(wxString wanted_filename);
-    ~AtomicCoordinatesAsset( );
-
-    long simulation_3d_job_id;
-
-    int x_size;
-    int y_size;
-    int z_size;
-
-    wxString pdb_id;
-    float    pdb_avg_bfactor;
-    float    pdb_std_bfactor;
-    float    effective_weight;
-
-    void Update(wxString wanted_filename);
-    void CopyFrom(Asset* other_asset);
-};
-#endif
-
 /*
 class ClassesAsset : public Asset {
 
@@ -188,159 +153,148 @@ class ClassesAsset : public Asset {
 
 class AssetList {
 
-  protected:
-    long number_allocated;
+protected :
 
-  public:
-    AssetList( );
-    virtual ~AssetList( );
+	long number_allocated;
 
-    long number_of_assets;
+public :
 
-    Asset* assets;
+	AssetList();
+	virtual ~AssetList();
 
-    virtual void AddAsset(Asset* asset_to_add)      = 0;
-    virtual void RemoveAsset(long number_to_remove) = 0;
-    virtual void RemoveAll( )                       = 0;
-    //	virtual long FindFile(wxFileName file_to_find) = 0;
-    virtual void CheckMemory( ) = 0;
+	long number_of_assets;
 
-    virtual Asset*                 ReturnAssetPointer(long wanted_asset) = 0;
-    virtual MovieAsset*            ReturnMovieAssetPointer(long wanted_asset);
-    virtual ImageAsset*            ReturnImageAssetPointer(long wanted_asset);
-    virtual ParticlePositionAsset* ReturnParticlePositionAssetPointer(long wanted_asset);
-    virtual VolumeAsset*           ReturnVolumeAssetPointer(long wanted_asset);
-#ifdef EXPERIMENTAL
-    virtual AtomicCoordinatesAsset* ReturnAtomicCoordinatesAssetPointer(long wanted_asset);
-#endif
-    virtual int      ReturnAssetID(long wanted_asset)                                      = 0;
-    virtual long     ReturnParentAssetID(long wanted_asset)                                = 0;
-    virtual wxString ReturnAssetName(long wanted_asset)                                    = 0;
-    virtual int      ReturnArrayPositionFromID(int wanted_id, int last_found_position = 0) = 0;
-    virtual int      ReturnArrayPositionFromParentID(int wanted_id)                        = 0;
-    virtual wxString ReturnAssetFullFilename(long wanted_asst)                             = 0;
+	Asset *assets;
 
-    long ReturnNumberOfAssets( ) { return number_of_assets; }
+	virtual void AddAsset(Asset *asset_to_add) = 0;
+	virtual void RemoveAsset(long number_to_remove) = 0;
+	virtual void RemoveAll() = 0;
+//	virtual long FindFile(wxFileName file_to_find) = 0;
+	virtual void CheckMemory() = 0;
+
+	virtual Asset * ReturnAssetPointer(long wanted_asset) = 0;
+	virtual MovieAsset * ReturnMovieAssetPointer(long wanted_asset);
+	virtual ImageAsset * ReturnImageAssetPointer(long wanted_asset);
+	virtual ParticlePositionAsset * ReturnParticlePositionAssetPointer(long wanted_asset);
+	virtual VolumeAsset* ReturnVolumeAssetPointer(long wanted_asset);
+
+	virtual int ReturnAssetID(long wanted_asset) = 0;
+	virtual long ReturnParentAssetID(long wanted_asset) = 0;
+	virtual wxString ReturnAssetName(long wanted_asset) = 0;
+	virtual int ReturnArrayPositionFromID(int wanted_id, int last_found_position = 0) = 0;
+	virtual int ReturnArrayPositionFromParentID(int wanted_id) = 0;
+	virtual wxString ReturnAssetFullFilename(long wanted_asst) = 0;
+
+	long ReturnNumberOfAssets() {return number_of_assets;}
 };
+
 
 class MovieAssetList : public AssetList {
 
-  public:
-    MovieAssetList( );
-    ~MovieAssetList( );
+public:
+	
+	MovieAssetList();
+	~MovieAssetList();
+	
 
-    Asset*      ReturnAssetPointer(long wanted_asset);
-    MovieAsset* ReturnMovieAssetPointer(long wanted_asset);
+	Asset * ReturnAssetPointer(long wanted_asset);
+	MovieAsset * ReturnMovieAssetPointer(long wanted_asset);
 
-    int      ReturnAssetID(long wanted_asset);
-    long     ReturnParentAssetID(long wanted_asset);
-    wxString ReturnAssetName(long wanted_asset);
-    int      ReturnArrayPositionFromID(int wanted_id, int last_found_position = 0);
-    int      ReturnArrayPositionFromParentID(int wanted_id);
-    wxString ReturnAssetFullFilename(long wanted_asst);
+	int ReturnAssetID(long wanted_asset);
+	long ReturnParentAssetID(long wanted_asset);
+	wxString ReturnAssetName(long wanted_asset);
+	int ReturnArrayPositionFromID(int wanted_id, int last_found_position = 0 );
+	int ReturnArrayPositionFromParentID(int wanted_id);
+	wxString ReturnAssetFullFilename(long wanted_asst);
 
-    void AddAsset(Asset* asset_to_add);
-    void RemoveAsset(long number_to_remove);
-    void RemoveAll( );
-    long FindFile(wxFileName file_to_find, bool also_check_vs_shortname = false, long max_asset_number_to_check = -1);
-    void CheckMemory( );
+	void AddAsset(Asset *asset_to_add);
+	void RemoveAsset(long number_to_remove);
+	void RemoveAll();
+	long FindFile(wxFileName file_to_find, bool also_check_vs_shortname = false, long max_asset_number_to_check = -1);
+	void CheckMemory();
+
 };
 
 class ImageAssetList : public AssetList {
 
-  public:
-    ImageAssetList( );
-    ~ImageAssetList( );
+public:
 
-    Asset*      ReturnAssetPointer(long wanted_asset);
-    ImageAsset* ReturnImageAssetPointer(long wanted_asset);
+	ImageAssetList();
+	~ImageAssetList();
 
-    int      ReturnAssetID(long wanted_asset);
-    long     ReturnParentAssetID(long wanted_asset);
-    wxString ReturnAssetName(long wanted_asset);
-    int      ReturnArrayPositionFromID(int wanted_id, int last_found_position = 0);
-    int      ReturnArrayPositionFromParentID(int wanted_id);
-    wxString ReturnAssetFullFilename(long wanted_asst);
 
-    void AddAsset(Asset* asset_to_add);
-    void RemoveAsset(long number_to_remove);
-    void RemoveAll( );
-    long FindFile(wxFileName file_to_find, bool also_check_vs_shortname = false, long max_asset_number_to_check = -1);
-    void CheckMemory( );
+	Asset * ReturnAssetPointer(long wanted_asset);
+	ImageAsset * ReturnImageAssetPointer(long wanted_asset);
+
+	int ReturnAssetID(long wanted_asset);
+	long ReturnParentAssetID(long wanted_asset);
+	wxString ReturnAssetName(long wanted_asset);
+	int ReturnArrayPositionFromID(int wanted_id, int last_found_position = 0 );
+	int ReturnArrayPositionFromParentID(int wanted_id);
+	wxString ReturnAssetFullFilename(long wanted_asst);
+
+	void AddAsset(Asset *asset_to_add);
+	void RemoveAsset(long number_to_remove);
+	void RemoveAll();
+	long FindFile(wxFileName file_to_find, bool also_check_vs_shortname = false, long max_asset_number_to_check = -1);
+	void CheckMemory();
+
 };
 
 class ParticlePositionAssetList : public AssetList {
 
-  public:
-    ParticlePositionAssetList( );
-    ~ParticlePositionAssetList( );
+public:
 
-    Asset*                 ReturnAssetPointer(long wanted_asset);
-    ParticlePositionAsset* ReturnParticlePositionAssetPointer(long wanted_asset);
+	ParticlePositionAssetList();
+	~ParticlePositionAssetList();
 
-    int  ReturnAssetID(long wanted_asset);
-    long ReturnParentAssetID(long wanted_asset);
 
-    wxString ReturnAssetName(long wanted_asset) { return wxEmptyString; };
+	Asset * ReturnAssetPointer(long wanted_asset);
+	ParticlePositionAsset * ReturnParticlePositionAssetPointer(long wanted_asset);
 
-    wxString ReturnAssetFullFilename(long wanted_asst) { return wxEmptyString; };
+	int ReturnAssetID(long wanted_asset);
+	long ReturnParentAssetID(long wanted_asset);
+	wxString ReturnAssetName(long wanted_asset) {return wxEmptyString;};
+	wxString ReturnAssetFullFilename(long wanted_asst)  {return wxEmptyString;};
+	int ReturnArrayPositionFromID(int wanted_id, int last_found_position = 0 );
+	int ReturnArrayPositionFromParentID(int wanted_id);
 
-    int ReturnArrayPositionFromID(int wanted_id, int last_found_position = 0);
-    int ReturnArrayPositionFromParentID(int wanted_id);
+	void AddAsset(Asset *asset_to_add);
+	void RemoveAsset(long number_to_remove);
+	void RemoveAssetsWithGivenParentImageID(long parent_image_id);
+	void RemoveAll();
+	void CheckMemory();
 
-    void AddAsset(Asset* asset_to_add);
-    void RemoveAsset(long number_to_remove);
-    void RemoveAssetsWithGivenParentImageID(long parent_image_id);
-    void RemoveAll( );
-    void CheckMemory( );
 };
+
 
 class VolumeAssetList : public AssetList {
 
-  public:
-    VolumeAssetList( );
-    ~VolumeAssetList( );
+public:
 
-    Asset*       ReturnAssetPointer(long wanted_asset);
-    VolumeAsset* ReturnVolumeAssetPointer(long wanted_asset);
+	VolumeAssetList();
+	~VolumeAssetList();
 
-    int      ReturnAssetID(long wanted_asset);
-    long     ReturnParentAssetID(long wanted_asset);
-    wxString ReturnAssetName(long wanted_asset);
-    int      ReturnArrayPositionFromID(int wanted_id, int last_found_position = 0);
-    int      ReturnArrayPositionFromParentID(int wanted_id);
-    wxString ReturnAssetFullFilename(long wanted_asst);
 
-    void AddAsset(Asset* asset_to_add);
-    void RemoveAsset(long number_to_remove);
-    void RemoveAll( );
-    long FindFile(wxFileName file_to_find, bool also_check_vs_shortname = false, long max_asset_number_to_check = -1);
-    void CheckMemory( );
+	Asset * ReturnAssetPointer(long wanted_asset);
+	VolumeAsset * ReturnVolumeAssetPointer(long wanted_asset);
+
+	int ReturnAssetID(long wanted_asset);
+	long ReturnParentAssetID(long wanted_asset);
+	wxString ReturnAssetName(long wanted_asset);
+	int ReturnArrayPositionFromID(int wanted_id, int last_found_position = 0 );
+	int ReturnArrayPositionFromParentID(int wanted_id);
+	wxString ReturnAssetFullFilename(long wanted_asst);
+
+	void AddAsset(Asset *asset_to_add);
+	void RemoveAsset(long number_to_remove);
+	void RemoveAll();
+	long FindFile(wxFileName file_to_find, bool also_check_vs_shortname = false, long max_asset_number_to_check = -1);
+	void CheckMemory();
+
 };
 
-#ifdef EXPERIMENTAL
-class AtomicCoordinatesAssetList : public AssetList {
 
-  public:
-    AtomicCoordinatesAssetList( );
-    ~AtomicCoordinatesAssetList( );
 
-    Asset*                  ReturnAssetPointer(long wanted_asset);
-    AtomicCoordinatesAsset* ReturnAtomicCoordinatesAssetPointer(long wanted_asset);
-
-    int      ReturnAssetID(long wanted_asset);
-    long     ReturnParentAssetID(long wanted_asset);
-    wxString ReturnAssetName(long wanted_asset);
-    int      ReturnArrayPositionFromID(int wanted_id, int last_found_position = 0);
-    int      ReturnArrayPositionFromParentID(int wanted_id);
-    wxString ReturnAssetFullFilename(long wanted_asst);
-
-    void AddAsset(Asset* asset_to_add);
-    void RemoveAsset(long number_to_remove);
-    void RemoveAll( );
-    long FindFile(wxFileName file_to_find, bool also_check_vs_shortname = false, long max_asset_number_to_check = -1);
-    void CheckMemory( );
-};
-#endif
 
 #endif

@@ -1,107 +1,113 @@
 #ifndef __Generate3DPanel__
 #define __Generate3DPanel__
 
-class Generate3DPanel : public Generate3DPanelParent {
 
-  protected:
-    // Handlers for Refine3DPanel events.
-    void OnUpdateUI(wxUpdateUIEvent& event);
-    void OnExpertOptionsToggle(wxCommandEvent& event);
-    void OnInfoURL(wxTextUrlEvent& event);
-    void TerminateButtonClick(wxCommandEvent& event);
-    void FinishButtonClick(wxCommandEvent& event);
-    void StartReconstructionClick(wxCommandEvent& event);
-    void ResetAllDefaultsClick(wxCommandEvent& event);
+class Generate3DPanel : public Generate3DPanelParent
+{
 
-    // overridden socket methods..
+	protected:
+		// Handlers for Refine3DPanel events.
+		void OnUpdateUI( wxUpdateUIEvent& event );
+		void OnExpertOptionsToggle( wxCommandEvent& event );
+		void OnInfoURL( wxTextUrlEvent& event );
+		void TerminateButtonClick( wxCommandEvent& event );
+		void FinishButtonClick( wxCommandEvent& event );
+		void StartReconstructionClick( wxCommandEvent& event );
+		void ResetAllDefaultsClick( wxCommandEvent& event );
 
-    void OnSocketJobResultMsg(JobResult& received_result);
-    void OnSocketJobResultQueueMsg(ArrayofJobResults& received_queue);
-    void SetNumberConnectedText(wxString wanted_text);
-    void SetTimeRemainingText(wxString wanted_text);
-    void OnSocketAllJobsFinished( );
+		// overridden socket methods..
 
-    int length_of_process_number;
-    //RefinementManager my_refinement_manager;
+		void OnSocketJobResultMsg(JobResult &received_result);
+		void OnSocketJobResultQueueMsg(ArrayofJobResults &received_queue);
+		void SetNumberConnectedText(wxString wanted_text);
+		void SetTimeRemainingText(wxString wanted_text);
+		void OnSocketAllJobsFinished();
 
-    int active_orth_thread_id;
-    int next_thread_id;
+		int length_of_process_number;
+		//RefinementManager my_refinement_manager;
 
-  public:
-    wxStopWatch stopwatch;
+		int active_orth_thread_id;
+		int next_thread_id;
 
-    long time_of_last_result_update;
-    long number_of_received_particle_results;
-    long number_of_expected_results;
-    bool refinement_package_combo_is_dirty;
-    bool run_profiles_are_dirty;
-    bool input_params_combo_is_dirty;
+	public:
 
-    JobResult* buffered_results;
+		wxStopWatch stopwatch;
 
-    long current_job_id;
-    long selected_refinement_package;
+		long time_of_last_result_update;
+		long number_of_received_particle_results;
+		long number_of_expected_results;
+		bool refinement_package_combo_is_dirty;
+		bool run_profiles_are_dirty;
+		bool input_params_combo_is_dirty;
 
-    long time_of_last_update;
-    long current_job_starttime;
+		JobResult *buffered_results;
 
-    wxArrayString output_filenames;
+		long current_job_id;
+		long selected_refinement_package;
 
-    //int length_of_process_number;
+		long time_of_last_update;
+		long current_job_starttime;
 
-    JobTracker my_job_tracker;
+		wxArrayString output_filenames;
 
-    bool running_job;
 
-    // active
+		//int length_of_process_number;
 
-    int running_job_type;
+		JobTracker my_job_tracker;
 
-    RefinementPackage* active_refinement_package;
-    RunProfile         active_reconstruction_run_profile;
+		bool running_job;
 
-    float active_mask_radius;
-    float active_inner_mask_radius;
-    float active_resolution_limit_rec;
-    float active_score_weight_conversion;
-    float active_score_threshold;
-    bool  active_adjust_scores;
-    bool  active_crop_images;
-    bool  active_save_half_maps;
-    bool  active_update_statistics;
-    bool  active_apply_ewald_correction;
-    bool  active_apply_inverse_hand;
+		// active
 
-    Refinement* input_refinement;
+		int running_job_type;
 
-    //
+		RefinementPackage *active_refinement_package;
+		RunProfile active_reconstruction_run_profile;
 
-    void Reset( );
-    void SetDefaults( );
-    Generate3DPanel(wxWindow* parent);
-    void SetInfo( );
+		float active_mask_radius;
+		float active_inner_mask_radius;
+		float active_resolution_limit_rec;
+		float active_score_weight_conversion;
+		float active_score_threshold;
+		bool active_adjust_scores;
+		bool active_crop_images;
+		bool active_save_half_maps;
+		bool active_update_statistics;
+		bool active_apply_ewald_correction;
+		bool active_apply_inverse_hand;
 
-    void WriteInfoText(wxString text_to_write);
-    void WriteErrorText(wxString text_to_write);
-    void WriteBlueText(wxString text_to_write);
+		Refinement *input_refinement;
 
-    void SetupReconstructionJob( );
-    void SetupMerge3dJob( );
-    void RunReconstructionJob( );
-    void RunMerge3dJob( );
 
-    void FillRefinementPackagesComboBox( );
-    void FillRunProfileComboBoxes( );
-    void FillInputParamsComboBox( );
-    void NewRefinementPackageSelected( );
+		//
 
-    void OnRefinementPackageComboBox(wxCommandEvent& event);
-    void OnInputParametersComboBox(wxCommandEvent& event);
+		void Reset();
+		void SetDefaults();
+		Generate3DPanel( wxWindow* parent );
+		void SetInfo();
 
-    void OnOrthThreadComplete(ReturnProcessedImageEvent& my_event);
+		void WriteInfoText(wxString text_to_write);
+		void WriteErrorText(wxString text_to_write);
+		void WriteBlueText(wxString text_to_write);
 
-    void ProcessJobResult(JobResult* result_to_process);
-    void ProcessAllJobsFinished( );
+		void SetupReconstructionJob();
+		void SetupMerge3dJob();
+		void RunReconstructionJob();
+		void RunMerge3dJob();
+
+		void FillRefinementPackagesComboBox();
+		void FillRunProfileComboBoxes();
+		void FillInputParamsComboBox();
+		void NewRefinementPackageSelected();
+
+		void OnRefinementPackageComboBox( wxCommandEvent& event );
+		void OnInputParametersComboBox( wxCommandEvent& event );
+
+		void OnOrthThreadComplete(ReturnProcessedImageEvent& my_event);
+
+		void ProcessJobResult(JobResult *result_to_process);
+		void ProcessAllJobsFinished();
+
 };
 
 #endif // __MyRefine3DPanel__

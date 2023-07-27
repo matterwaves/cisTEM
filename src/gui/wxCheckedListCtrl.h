@@ -8,16 +8,22 @@
 #include <wx/listctrl.h>
 #include <wx/imaglist.h>
 
-class wxCheckedListCtrl : public wxListCtrl {
-  protected:
-    wxImageList m_imagelist;
+class wxCheckedListCtrl : public wxListCtrl
+{
+	protected:
 
-  public:
-    wxCheckedListCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pt, const wxSize& sz, long style);
-    bool Create(wxWindow* parent, wxWindowID id, const wxPoint& pt, const wxSize& sz, long style, const wxValidator& validator, const wxString& name);
+	wxImageList m_imagelist;
 
-    bool IsChecked(long item) const;
-    void SetChecked(long item, bool checked);
+	public:
+
+	wxCheckedListCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pt, const wxSize& sz, long style);
+	bool Create(wxWindow* parent, wxWindowID id, const wxPoint& pt, const wxSize& sz, long style, const wxValidator& validator, const wxString& name);
+
+	bool IsChecked(long item) const;
+	void SetChecked(long item, bool checked);
+
 };
 
 #endif
+
+

@@ -4,19 +4,20 @@
 
 class SymmetryMatrix {
 
-  public:
-    wxString        symmetry_symbol;
-    int             number_of_matrices;
-    RotationMatrix* rot_mat; /* 3D rotation matrix array*/
+public:
 
-    SymmetryMatrix( );
-    SymmetryMatrix(wxString wanted_symmetry_symbol);
-    ~SymmetryMatrix( );
+	wxString			symmetry_symbol;
+	int					number_of_matrices;
+	RotationMatrix		*rot_mat;                /* 3D rotation matrix array*/
 
-    SymmetryMatrix& operator=(const SymmetryMatrix& other_matrix);
-    SymmetryMatrix& operator=(const SymmetryMatrix* other_matrix);
+	SymmetryMatrix();
+	SymmetryMatrix(wxString wanted_symmetry_symbol);
+	~SymmetryMatrix();
 
-    void Init(wxString wanted_symmetry_symbol);
+	SymmetryMatrix & operator = (const SymmetryMatrix &other_matrix);
+	SymmetryMatrix & operator = (const SymmetryMatrix *other_matrix);
 
-    void PrintMatrices( );
+	void Init(wxString wanted_symmetry_symbol);
+
+	void PrintMatrices();
 };

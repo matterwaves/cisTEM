@@ -16,7 +16,7 @@ add_library(cisTEM_gui STATIC
 	ResultsDataViewListCtrl.cpp 
 	MyMovieFilterDialog.cpp 
 	MainFrame.cpp 
-	MyAssetPanelParent.cpp 
+	MyAssetParentPanel.cpp 
 	MyMovieAssetPanel.cpp 
 	MyImageAssetPanel.cpp 
 	MyParticlePositionAssetPanel.cpp 
@@ -43,8 +43,7 @@ add_library(cisTEM_gui STATIC
 	MyVolumeAssetPanel.cpp 
 	MyResultsPanel.cpp 
 	MyAssetsPanel.cpp 
-	ActionsPanelSpa.cpp 
-    ActionsPanelTm.cpp
+	MyActionsPanel.cpp 
 	MySettingsPanel.cpp
 	MyParticlePositionExportDialog.cpp 
 	MyFrealignExportDialog.cpp 
@@ -73,14 +72,13 @@ add_library(cisTEM_gui STATIC
 	DistributionPlotDialog.cpp 
 	RefineCTFPanel.cpp
 	ShowTemplateMatchResultsPanel.cpp
-    MatchTemplatePanel.cpp 
-    MatchTemplateResultsPanel.cpp 
-    RefineTemplatePanel.cpp
 )
 
 if (BUILD_EXPERIMENTAL_FEATURES)
-	add_library(cisTEM_gui_experimental STATIC 
-        RefineTemplateDevPanel.cpp
+	add_library(cisTEM_gui_experimental STATIC
+		MatchTemplatePanel.cpp 
+		MatchTemplateResultsPanel.cpp 
+		RefineTemplatePanel.cpp 
 		MyExperimentalPanel.cpp
 	)
 endif(BUILD_EXPERIMENTAL_FEATURES)
