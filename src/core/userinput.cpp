@@ -1,4 +1,5 @@
 #include "core_headers.h"
+#include "wx/wxcrtvararg.h"
 
 UserInput::UserInput()
 {

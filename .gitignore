@@ -1,6 +1,7 @@
 autom4te.cache
 m4
 config.sub
+compile_commands.json
 Makefile.in
 ltmain.sh
 aclocal.m4
@@ -20,6 +21,7 @@ src/gpu/.cproject
 src/gpu/libcisTEMGPU.a
 RemoteSystemsTempFiles
 .metadata/
+.cache/
 .settings/
 .autotools
 .cproject

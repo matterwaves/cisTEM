@@ -1,6 +1,5 @@
 #include "../../core/core_headers.h"
 
-
 // Values for data that are passed around in the results.
 const int number_of_output_images = 8; //mip, scaledmip, psi, theta, phi, pixel, defocus, sums, sqsums
 const int number_of_meta_data_values = 6; // img_x, img_y, number cccs, histogram values.
@@ -75,62 +74,6 @@ public:
 //	Image						*temp_image;
 };
 
-// This is the function which will be minimized
-float FrealignObjectiveFunction(void *scoring_parameters, float *array_of_values)
-{
-	ImageProjectionComparison *comparison_object = reinterpret_cast < ImageProjectionComparison *> (scoring_parameters);
-	comparison_object->particle->temp_parameters = comparison_object->particle->current_parameters;
-	comparison_object->particle->UnmapParameters(array_of_values);
-
-//	comparison_object->reference_volume->CalculateProjection(*comparison_object->projection_image, *comparison_object->particle->ctf_image,
-//			comparison_object->particle->alignment_parameters, 0.0, 0.0,
-//			comparison_object->particle->pixel_size / comparison_object->particle->filter_radius_high, false, true);
-
-	if (comparison_object->particle->no_ctf_weighting) comparison_object->reference_volume->CalculateProjection(*comparison_object->projection_image,
-			*comparison_object->particle->ctf_image, comparison_object->particle->alignment_parameters, 0.0, 0.0,
-			comparison_object->particle->pixel_size / comparison_object->particle->filter_radius_high, false, false, false, false, false);
-	// Case for normal parameter refinement with weighting applied to particle images and 3D reference
-	else if (comparison_object->particle->includes_reference_ssnr_weighting) comparison_object->reference_volume->CalculateProjection(*comparison_object->projection_image,
-			*comparison_object->particle->ctf_image, comparison_object->particle->alignment_parameters, 0.0, 0.0,
-			comparison_object->particle->pixel_size / comparison_object->particle->filter_radius_high, false, true, true, false, false);
-	// Case for normal parameter refinement with weighting applied only to particle images
-	else comparison_object->reference_volume->CalculateProjection(*comparison_object->projection_image,
-			*comparison_object->particle->ctf_image, comparison_object->particle->alignment_parameters, 0.0, 0.0,
-			comparison_object->particle->pixel_size / comparison_object->particle->filter_radius_high, false, true, false, true, true);
-
-//	if (comparison_object->particle->origin_micrograph < 0) comparison_object->particle->origin_micrograph = 0;
-//	comparison_object->particle->origin_micrograph++;
-//	for (int i = 0; i < comparison_object->projection_image->real_memory_allocated; i++) {comparison_object->projection_image->real_values[i] *= fabs(comparison_object->projection_image->real_values[i]);}
-//	comparison_object->projection_image->ForwardFFT();
-//	comparison_object->projection_image->CalculateCrossCorrelationImageWith(comparison_object->particle->particle_image);
-//	comparison_object->projection_image->SwapRealSpaceQuadrants();
-//	comparison_object->projection_image->BackwardFFT();
-//	comparison_object->projection_image->QuickAndDirtyWriteSlice("proj.mrc", comparison_object->particle->origin_micrograph);
-//	comparison_object->projection_image->SwapRealSpaceQuadrants();
-//	comparison_object->particle->particle_image->SwapRealSpaceQuadrants();
-//	comparison_object->particle->particle_image->BackwardFFT();
-//	comparison_object->particle->particle_image->QuickAndDirtyWriteSlice("part.mrc", comparison_object->particle->origin_micrograph);
-//	comparison_object->particle->particle_image->SwapRealSpaceQuadrants();
-//	exit(0);
-
-//	float score =  	- comparison_object->particle->particle_image->GetWeightedCorrelationWithImage(*comparison_object->projection_image, comparison_object->particle->bin_index,
-//			  comparison_object->particle->pixel_size / comparison_object->particle->signed_CC_limit)
-//			- comparison_object->particle->ReturnParameterPenalty(comparison_object->particle->temp_float);
-//	wxPrintf("psi, theta, phi, x, y, = %g, %g, %g, %g, %g, score = %g\n",
-//			comparison_object->particle->alignment_parameters.ReturnPsiAngle(),
-//			comparison_object->particle->alignment_parameters.ReturnThetaAngle(),
-//			comparison_object->particle->alignment_parameters.ReturnPhiAngle(),
-//			comparison_object->particle->alignment_parameters.ReturnShiftX(),
-//			comparison_object->particle->alignment_parameters.ReturnShiftY(), score);
-//	return score;
-//	wxPrintf("sigma_noise, mask_volume, penalty = %g %g %g\n", comparison_object->particle->sigma_noise, comparison_object->particle->mask_volume,
-//			comparison_object->particle->ReturnParameterPenalty(comparison_object->particle->temp_float));
-	return 	- comparison_object->particle->particle_image->GetWeightedCorrelationWithImage(*comparison_object->projection_image, comparison_object->particle->bin_index,
-			  comparison_object->particle->pixel_size / comparison_object->particle->signed_CC_limit)
-			- comparison_object->particle->ReturnParameterPenalty(comparison_object->particle->temp_parameters);
-		// This penalty term assumes a Gaussian x,y distribution that is probably not correct in most cases. It might be better to leave it out.
-
-}
 
 IMPLEMENT_APP(MatchTemplateApp)
 
@@ -199,8 +142,8 @@ void MatchTemplateApp::DoInteractiveUserInput()
 	voltage_kV = my_input->GetFloatFromUser("Beam energy (keV)", "The energy of the electron beam used to image the sample in kilo electron volts", "300.0", 0.0);
 	spherical_aberration_mm = my_input->GetFloatFromUser("Spherical aberration (mm)", "Spherical aberration of the objective lens in millimeters", "2.7");
 	amplitude_contrast = my_input->GetFloatFromUser("Amplitude contrast", "Assumed amplitude contrast", "0.07", 0.0, 1.0);
-	defocus1 = my_input->GetFloatFromUser("Defocus1 (angstroms)", "Defocus1 for the input image", "10000", 0.0);
-	defocus2 = my_input->GetFloatFromUser("Defocus2 (angstroms)", "Defocus2 for the input image", "10000", 0.0);
+	defocus1 = my_input->GetFloatFromUser("Defocus1 (angstroms)", "Defocus1 for the input image", "10000");
+	defocus2 = my_input->GetFloatFromUser("Defocus2 (angstroms)", "Defocus2 for the input image", "10000");
 	defocus_angle = my_input->GetFloatFromUser("Defocus Angle (degrees)", "Defocus Angle for the input image", "0.0");
 	phase_shift = my_input->GetFloatFromUser("Phase Shift (degrees)", "Additional phase shift in degrees", "0.0");
 //	low_resolution_limit = my_input->GetFloatFromUser("Low resolution limit (A)", "Low resolution limit of the data used for alignment in Angstroms", "300.0", 0.0);
