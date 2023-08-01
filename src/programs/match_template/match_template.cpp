@@ -225,64 +225,6 @@ void MatchTemplateApp::DoInteractiveUserInput()
 
 bool MatchTemplateApp::DoCalculation()
 {
-	/*
-	wxString input_particle_images 				= my_current_job.arguments[0].ReturnStringArgument(); // global
-	wxString input_parameter_file 				= my_current_job.arguments[1].ReturnStringArgument(); // not sure
-	wxString input_reconstruction				= my_current_job.arguments[2].ReturnStringArgument(); // global
-	wxString input_reconstruction_statistics 	= my_current_job.arguments[3].ReturnStringArgument(); // global
-	bool	 use_statistics						= my_current_job.arguments[4].ReturnBoolArgument();   // global
-	wxString ouput_matching_projections 		= my_current_job.arguments[5].ReturnStringArgument(); // ignore (always false)
-	wxString ouput_parameter_file				= my_current_job.arguments[6].ReturnStringArgument(); // not sure par file
-	wxString ouput_shift_file					= my_current_job.arguments[7].ReturnStringArgument(); // not sure output
-	wxString my_symmetry						= my_current_job.arguments[8].ReturnStringArgument(); // global
-	int		 first_particle						= my_current_job.arguments[9].ReturnIntegerArgument(); // local (effectively ignore)
-	int		 last_particle						= my_current_job.arguments[10].ReturnIntegerArgument(); // local (effectively ignore)
-	float	 percent_used						= my_current_job.arguments[11].ReturnFloatArgument();
-	float 	 pixel_size							= my_current_job.arguments[12].ReturnFloatArgument(); // local
-	float    voltage_kV							= my_current_job.arguments[13].ReturnFloatArgument(); // local
-	float 	 spherical_aberration_mm			= my_current_job.arguments[14].ReturnFloatArgument(); // local
-	float    amplitude_contrast					= my_current_job.arguments[15].ReturnFloatArgument(); // local
-	float	 molecular_mass_kDa					= my_current_job.arguments[16].ReturnFloatArgument(); // global
-	float    inner_mask_radius					= my_current_job.arguments[17].ReturnFloatArgument(); // global
-	float    outer_mask_radius					= my_current_job.arguments[18].ReturnFloatArgument(); // global
-	float    low_resolution_limit				= my_current_job.arguments[19].ReturnFloatArgument(); // global
-	float    high_resolution_limit				= my_current_job.arguments[20].ReturnFloatArgument(); // global
-	float	 signed_CC_limit					= my_current_job.arguments[21].ReturnFloatArgument(); // global
-	float	 classification_resolution_limit	= my_current_job.arguments[22].ReturnFloatArgument(); // global
-	float    particle_radius_angstroms					= my_current_job.arguments[23].ReturnFloatArgument(); // global
-	float	 high_resolution_limit_search		= my_current_job.arguments[24].ReturnFloatArgument(); // global
-	float	 angular_step						= my_current_job.arguments[25].ReturnFloatArgument(); // global
-	int		 best_parameters_to_keep			= my_current_job.arguments[26].ReturnIntegerArgument(); // global
-	float	 max_search_x						= my_current_job.arguments[27].ReturnFloatArgument(); // global
-	float	 max_search_y						= my_current_job.arguments[28].ReturnFloatArgument(); // global
-	refine_particle.mask_center_2d_x			= my_current_job.arguments[29].ReturnFloatArgument(); // global
-	refine_particle.mask_center_2d_y			= my_current_job.arguments[30].ReturnFloatArgument(); // global
-	refine_particle.mask_center_2d_z			= my_current_job.arguments[31].ReturnFloatArgument(); // global
-	refine_particle.mask_radius_2d				= my_current_job.arguments[32].ReturnFloatArgument(); // global
-	float	 defocus_search_range				= my_current_job.arguments[33].ReturnFloatArgument(); // global
-	float	 defocus_step						= my_current_job.arguments[34].ReturnFloatArgument(); // global
-	float	 padding							= my_current_job.arguments[35].ReturnFloatArgument(); // global
-//	float	 filter_constant					= my_current_job.arguments[35].ReturnFloatArgument();
-	bool	 global_search						= my_current_job.arguments[36].ReturnBoolArgument(); // global
-	bool	 local_refinement					= my_current_job.arguments[37].ReturnBoolArgument(); // global
-// Psi, Theta, Phi, ShiftX, ShiftY
-	refine_particle.parameter_map[3]			= my_current_job.arguments[38].ReturnBoolArgument(); //global
-	refine_particle.parameter_map[2]			= my_current_job.arguments[39].ReturnBoolArgument(); //global
-	refine_particle.parameter_map[1]			= my_current_job.arguments[40].ReturnBoolArgument(); // global
-	refine_particle.parameter_map[4]			= my_current_job.arguments[41].ReturnBoolArgument(); // global
-	refine_particle.parameter_map[5]			= my_current_job.arguments[42].ReturnBoolArgument(); // global
-	bool 	 calculate_matching_projections		= my_current_job.arguments[43].ReturnBoolArgument(); // global - but ignore
-	refine_particle.apply_2D_masking			= my_current_job.arguments[44].ReturnBoolArgument(); // global
-	bool	 ctf_refinement						= my_current_job.arguments[45].ReturnBoolArgument(); // global
-	bool	 normalize_particles				= my_current_job.arguments[46].ReturnBoolArgument();
-	bool	 invert_contrast					= my_current_job.arguments[47].ReturnBoolArgument(); // global - but ignore.
-	bool	 exclude_blank_edges				= my_current_job.arguments[48].ReturnBoolArgument();
-	bool	 normalize_input_3d					= my_current_job.arguments[49].ReturnBoolArgument();
-	bool	 threshold_input_3d					= my_current_job.arguments[50].ReturnBoolArgument();
-	bool	 local_global_refine				= my_current_job.arguments[51].ReturnBoolArgument();
-	int		 current_class						= my_current_job.arguments[52].ReturnIntegerArgument(); // global - but ignore.
-	bool	 ignore_input_angles				= my_current_job.arguments[53].ReturnBoolArgument(); // during global search, ignore the starting parameters (this helps reduce bias)
-*/
 
 	wxDateTime start_time = wxDateTime::Now();
 

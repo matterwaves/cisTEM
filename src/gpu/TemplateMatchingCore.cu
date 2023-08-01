@@ -185,25 +185,13 @@ void TemplateMatchingCore::RunInnerLoop(Image &projection_filter, float c_pixel,
 	cudaGetDevice(&thisDevice);
 	wxPrintf("Thread %d is running on device %d\n", threadIDX, thisDevice);
 
-//	cudaErr(cudaFuncSetCacheConfig(SumPixelWiseKernel, cudaFuncCachePreferL1));
-
-//	bool make_graph = true;
-//	bool first_loop_complete = false;
-
-	for (current_search_position = first_search_position; current_search_position <= last_search_position; current_search_position++)
-	{
-
-		if ( current_search_position % 10 == 0)
-		{
+	for (current_search_position = first_search_position; current_search_position <= last_search_position; current_search_position++) {
+		if ( current_search_position % 10 == 0) {
 			wxPrintf("Starting position %d/ %d\n", current_search_position, last_search_position);
 		}
 
-
-		for (float current_psi = psi_start; current_psi <= psi_max; current_psi += psi_step)
-		{
-
+		for (float current_psi = psi_start; current_psi <= psi_max; current_psi += psi_step) {
 			angles.Init(global_euler_search.list_of_search_parameters[current_search_position][0], global_euler_search.list_of_search_parameters[current_search_position][1], current_psi, 0.0, 0.0);
-//			current_projection.SetToConstant(0.0f); // This also sets the FFT padding to zero
 			template_reconstruction.ExtractSlice(current_projection, angles, 1.0f, false);
 			current_projection.complex_values[0] = 0.0f + I * 0.0f;
 
@@ -231,117 +219,62 @@ void TemplateMatchingCore::RunInnerLoop(Image &projection_filter, float c_pixel,
 			// cuFFT multiplies by 1/root(N) forward and then 1/root(N) on the inverse. The input image is done on the cpu, and so has no scaling.
 			// Stating false on the forward FFT leaves the ref = ref*root(N). Then we have root(N)*ref*input * root(N) (on the inverse) so we need a factor of 1/N to come out proper. This is included in BackwardFFTAfterComplexConjMul
 			d_padded_reference.ForwardFFT(false);
-
-			//      d_padded_reference.ForwardFFTAndClipInto(d_current_projection,false);
 			d_padded_reference.BackwardFFTAfterComplexConjMul(d_input_image.complex_values_16f, true);
 
-//			d_padded_reference.BackwardFFTAfterComplexConjMul(d_input_image.complex_values_gpu, false);
-//			d_padded_reference.ConvertToHalfPrecision(false);
-
-
-
-			if (DO_HISTOGRAM)
-			{
-				if ( ! histogram.is_allocated_histogram )
-				{
+			if (DO_HISTOGRAM) {
+				if ( ! histogram.is_allocated_histogram ) {
 					d_padded_reference.NppInit();
 					histogram.BufferInit(d_padded_reference.npp_ROI);
 				}
+
 				histogram.AddToHistogram(d_padded_reference);
 			}
 
-//			if (make_graph && first_loop_complete)
-//			{
-//				wxPrintf("\nBeginning stream capture for creation of graph\n");
-//				cudaStreamBeginCapture(cudaStreamPerThread, cudaStreamCaptureModeGlobal);
-//			}
-//
-//			if (first_loop_complete && ! make_graph)
-//			{
-//				cudaGraphLaunch(graphExec, cudaStreamPerThread);
-//
-//			}
-//			else
-//			{
-				this->MipPixelWise( __float2half_rn(current_psi) , __float2half_rn(global_euler_search.list_of_search_parameters[current_search_position][1]),
+			this->MipPixelWise( __float2half_rn(current_psi) , __float2half_rn(global_euler_search.list_of_search_parameters[current_search_position][1]),
 																					  __float2half_rn(global_euler_search.list_of_search_parameters[current_search_position][0]));
-	//			this->MipPixelWise(d_padded_reference, float(current_psi) , float(global_euler_search.list_of_search_parameters[current_search_position][1]),
-	//																			 	 float(global_euler_search.list_of_search_parameters[current_search_position][0]));
-//				this->SumPixelWise(d_padded_reference);
-//			}
-
-
-//			if (make_graph && first_loop_complete)
-//			{
-//				wxPrintf("\nEnding stream capture for creation of graph\n");
-//				cudaStreamEndCapture(cudaStreamPerThread, &graph);
-//				cudaGraphInstantiate(&graphExec, graph, NULL, NULL, 0);
-//				make_graph = false;
-//			}
-
 
 			ccc_counter++;
 			total_number_of_cccs_calculated++;
 
-
-			if ( ccc_counter % 10 == 0)
-			{
+			if ( ccc_counter % 10 == 0) {
 				this->AccumulateSums(my_stats, d_sum1, d_sumSq1);
 			}
 
 
-			if ( ccc_counter % 100 == 0)
-			{
-
+			if ( ccc_counter % 100 == 0) {
 				d_sum2.AddImage(d_sum1);
 				d_sum1.Zeros();
 
 				d_sumSq2.AddImage(d_sumSq1);
 				d_sumSq1.Zeros();
-
 			}
 
-			if ( ccc_counter % 10000 == 0)
-			{
-
+			if ( ccc_counter % 10000 == 0) {
 				d_sum3.AddImage(d_sum2);
 				d_sum2.Zeros();
 
 				d_sumSq3.AddImage(d_sumSq2);
 				d_sumSq2.Zeros();
-
 			}
-
 
 			current_projection.is_in_real_space = false;
 			d_padded_reference.is_in_real_space = true;
-//			d_padded_reference.Zeros();
 			cudaEventRecord(gpu_work_is_done_Event, cudaStreamPerThread);
 
-
-//			first_loop_complete = true;
-
-			if (is_running_locally)
-			{
-				if (ReturnThreadNumberOfCurrentThread() == 0)
-				{
+			if (is_running_locally) {
+				if (ReturnThreadNumberOfCurrentThread() == 0) {
 					current_correlation_position++;
 					if (current_correlation_position > total_correlation_positions) current_correlation_position = total_correlation_positions;
 					my_progress->Update(current_correlation_position);
 				}
-			}
-			else
-			{
+			} else {
 				temp_float = current_correlation_position;
 				JobResult *temp_result = new JobResult;
 				temp_result->SetResult(1, &temp_float);
 				parent_pointer->AddJobToResultQueue(temp_result);
 			}
-			} // loop over psi angles
-
-      
+		} // loop over psi angles
  	} // end of outer loop euler sphere position
-
 
 	wxPrintf("\t\t\ntotal number %d\n",ccc_counter);
 
