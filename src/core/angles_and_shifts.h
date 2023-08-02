@@ -1,5 +1,7 @@
 /*  \brief  AnglesAndShifts class (particle Euler angles and shifts) */
 
+#include <iostream>
+
 class AnglesAndShifts {
 
 public:

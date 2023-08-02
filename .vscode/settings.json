@@ -17,6 +17,7 @@
     "files.associations": {
         "string": "cpp",
         "filesystem": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "ostream": "cpp"
     },
 }

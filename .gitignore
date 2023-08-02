@@ -25,6 +25,8 @@ RemoteSystemsTempFiles
 .settings/
 .autotools
 .cproject
+.vscode/
+23_08_01
 /debug_build/
 /release_build/
 **/build*
